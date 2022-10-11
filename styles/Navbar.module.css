@@ -1,0 +1,144 @@
+.navbar{
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 6vh;
+  background-color: #181B1D;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.navbar h3{
+  color: #fff;
+  text-transform: uppercase;
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 3px;
+  cursor: context-menu;
+}
+.navbar p{
+  color: #fff;
+  font-weight: 100;
+  font-size: 24px;
+  cursor: context-menu;
+}
+/* Links */
+.navbar a{
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 100;
+  transition: 0.3s;
+  position: relative;
+}
+.navbar a:hover{
+  color: #AFC0D5;
+}
+.navbar a::before{
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background: #AFC0D5;
+  transform: scale(0);
+  transition: transform 0.3s ease-in-out;
+  transform-origin: right;
+}
+.navbar a:hover::before{
+  transform: scale(1);
+  transform-origin: left;
+}
+/* Links */
+/* Left */
+.navbarLeft{
+  display: flex;
+  align-items: center;
+  height: 80%;
+  gap: 24px;
+}
+.navbarLeft svg{
+  margin-left: 48px;
+  width: 50px;
+  height: 100%;
+}
+.navbarLeft div{
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.navbarLeft > div:first-child{
+  gap: 4px;
+}
+.navbarLeft > .navbarNavigation{
+  gap: 24px
+}
+/* Left */
+/* Right */
+.navbarRight{
+  display: flex;
+  align-items: center;
+  height: 80%;
+  gap: 8px;
+}
+.navbarRight a{
+  margin-right: 48px;
+}
+.navbarRight svg{
+  color: #fff;
+  font-size: 20px;
+}
+/* Right */
+/* Responsive */
+.menuToggle{
+  position: relative;
+  display: none;
+}
+
+@media (max-width: 840px) {
+  .navbarLeft svg{
+    margin-left: 12px;
+  }
+  .navbarRight a{
+    margin-right: 12px;
+  }
+}
+
+@media (max-width: 750px){
+  .navbarRight .logginIcon{
+    display: none;
+  }
+  .navbarRight .menuToggle{
+    display: block;
+    margin-right: 12px;
+  }
+  .navbarLeft .navbarNavigation{
+    position: absolute;
+    display: none;
+    top: 6vh;
+    flex-direction: column;
+    background-color: #181B1D;
+    height: auto;
+    width: 100%;
+    padding: 24px;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+  }
+  .navbarNavigation p{
+    display: none;
+  }
+  .navbarNavigation a {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    width: 100%  }
+}
+
+@media (max-width: 430px){
+  .navbarRight a{
+    margin-right: 0;
+    letter-spacing: 1px;
+  }
+  .navbar h3{
+    letter-spacing: 1px;
+  }
+}
