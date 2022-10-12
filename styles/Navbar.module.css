@@ -16,6 +16,7 @@
   font-weight: 500;
   letter-spacing: 3px;
   cursor: context-menu;
+  font-size: 16px;
 }
 .navbar p{
   color: #fff;
@@ -31,9 +32,10 @@
   font-weight: 100;
   transition: 0.3s;
   position: relative;
+  font-size: 14px;
 }
 .navbar a:hover{
-  color: #AFC0D5;
+  color: #38C9F2;
 }
 .navbar a::before{
   content: '';
@@ -41,7 +43,7 @@
   bottom: -2px;
   width: 100%;
   height: 2px;
-  background: #AFC0D5;
+  background: #38C9F2;
   transform: scale(0);
   transition: transform 0.3s ease-in-out;
   transform-origin: right;
@@ -87,7 +89,7 @@
 }
 .navbarRight svg{
   color: #fff;
-  font-size: 20px;
+  font-size: 16px;
 }
 /* Right */
 /* Responsive */

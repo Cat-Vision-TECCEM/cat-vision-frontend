@@ -2,6 +2,7 @@ import styles from "../styles/Navbar.module.css";
 import { FaRegUser } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useState } from "react";
+import Link from "next/link";
 
 function Navbar() {
   const [menuClosed, setMenuClosed] = useState(true)
@@ -40,14 +41,14 @@ function Navbar() {
         </div>
         <div className={styles.navbarNavigation}>
           <p>|</p>
-          <a href="">Inicio</a>
+          <Link href={'/'}>Inicio</Link>
           <a href="">Productos</a>
           <a href="">Equipo</a>
         </div>
       </div>
       <div className={styles.navbarRight}>
         <FaRegUser className={styles.logginIcon} />
-        <a href=""> Iniciar Sesión</a>
+        <Link href='/login'>Iniciar Sesión</Link>
         <GiHamburgerMenu className={styles.menuToggle} onClick={() => menuToggle()} />
       </div>
     </nav>
