@@ -6,6 +6,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Kanit', sans-serif;
+  background-color: #EDF2F6;
 }
 a {
   color: inherit;
@@ -33,5 +34,33 @@ a {
   stroke: #000;
   stroke-width: 3px;
 }
-
-/*  */
+/* Logo */
+/* Navigation Links */
+.navigationLink{
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 100;
+  transition: 0.3s;
+  position: relative;
+  font-size: 14px;
+  cursor: pointer;
+}
+.navigationLink:hover{
+  color: #38C9F2;
+}
+.navigationLink::before{
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background: #38C9F2;
+  transform: scale(0);
+  transition: transform 0.3s ease-in-out;
+  transform-origin: right;
+}
+.navigationLink:hover::before{
+  transform: scale(1);
+  transform-origin: left;
+}

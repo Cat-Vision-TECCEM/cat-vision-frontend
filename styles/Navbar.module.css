@@ -24,35 +24,6 @@
   font-size: 24px;
   cursor: context-menu;
 }
-/* Links */
-.navbar a{
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-weight: 100;
-  transition: 0.3s;
-  position: relative;
-  font-size: 14px;
-}
-.navbar a:hover{
-  color: #38C9F2;
-}
-.navbar a::before{
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  width: 100%;
-  height: 2px;
-  background: #38C9F2;
-  transform: scale(0);
-  transition: transform 0.3s ease-in-out;
-  transform-origin: right;
-}
-.navbar a:hover::before{
-  transform: scale(1);
-  transform-origin: left;
-}
-/* Links */
 /* Left */
 .navbarLeft{
   display: flex;
