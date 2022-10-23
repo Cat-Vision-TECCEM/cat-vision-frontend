@@ -1,10 +1,23 @@
-import styles from "../styles/Login.module.css";
 import { NextPage } from "next";
 import PageNavigation from "../components/PageNavigation";
+import Map from "../components/Map";
+
 
 const dashboard: NextPage = () => {
+
   return(
-    <PageNavigation />
+    <div className="dashboardContainer">
+      <PageNavigation />
+      <div className="dashboardContentContainer">
+        <div className="dashboardContent">
+          <Map />
+        </div>
+        <div className="dashboardContent">
+          <div className="card"></div>
+          <div className="card"></div>
+        </div>
+      </div>
+    </div>
   )
 }
 

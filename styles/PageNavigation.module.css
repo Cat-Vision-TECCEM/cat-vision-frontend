@@ -1,6 +1,6 @@
 .pageNavigate{
   width: 100%;
-  height: 19vh;
+  /* height: 12vh; */
   background-color: #2E3846;
   box-sizing: border-box;
   padding: 32px;
@@ -12,6 +12,23 @@
   display: flex;
   gap: 12px;
   align-items: flex-start;
+}
+.activeLink{
+  color: #38C9F2;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 100;
+  position: relative;
+  font-size: 14px;
+  cursor: pointer;
+}
+.activeLink::before{
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background: #38C9F2;
 }
 
 /* Responsive */

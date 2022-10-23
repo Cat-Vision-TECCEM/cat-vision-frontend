@@ -1,0 +1,86 @@
+/* Dashboard */
+.dashboardContainer{
+  width: 100%;
+  min-height: 94vh;
+  position: relative;
+}
+.dashboardContentContainer{
+  position: absolute;
+  left: 2%;
+  height: 90%;
+  width: 96%;
+  display: grid;
+  grid-template-columns: repeat(2 , 1fr);
+  gap: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+.dashboardContentStore{
+  position: relative;
+  left: 2%;
+  width: 96%;
+  display: grid;
+  grid-template-columns: repeat(4 , 1fr);
+  gap: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+.dashboardContent{
+  height: 100%;
+  background-color: transparent;
+  border-radius: 5px;
+  display: flex;
+  gap: 12px;
+}
+.card{
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+  width: 100%;
+  min-height: 335px;
+  flex: 1;
+  border-radius: 5px;
+  background-color: #1D242E;
+}
+/* Responsive */
+@media (max-width: 1350px) {
+  .dashboardContent{
+    flex-direction: column;
+  }
+  .dashboardContentStore{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 1100px) {
+  .dashboardContentContainer{
+    grid-template-columns: 1fr;
+  }
+  .dashboardContent{
+    flex-direction: row;
+  }
+}
+@media(max-width: 900px){
+  .dashboardContentStore{
+    grid-template-columns: 1fr 1fr;
+    height: 180%;
+  }
+}
+@media (max-width: 650px) {
+  .dashboardContentContainer, .dashboardContentStore{
+    height: 130%;
+    left: 5%;
+    width: 90%;
+  }
+  .dashboardContentStore{
+    grid-template-columns: 1fr;
+  }
+  .dashboardContent{
+    flex-direction: column;
+  }
+}
+@media (max-height: 670px){
+  .dashboardContentContainer{
+    position: inherit;
+  }
+  .dashboardContent{
+    margin-bottom: 12px;
+  }
+}

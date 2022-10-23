@@ -1,21 +1,85 @@
 import styles from "../styles/PageNavigation.module.css";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-function PageNavigation(){
-  return(
+function PageNavigation() {
+  const [pageLink, setPageLink] = useState("Inicio");
+  
+  const newPageLink = (lname: string) => {
+    setPageLink(lname);
+    localStorage.setItem("aLink", lname);
+  };
+
+  const mainLinks = [
+    {
+      lname: "Inicio",
+      url: "/dashboard",
+    },
+    {
+      lname: "Tiendas",
+      url: "/dashboard/stores",
+    },
+    {
+      lname: "Pedidos",
+      url: "/dashboard/orders",
+    },
+    {
+      lname: "Configuración",
+      url: "/dashboard/settings",
+    },
+  ];
+
+  const secondaryLinks = [
+    {
+      lname: "Agregar Nueva Tienda",
+      url: "/dashboard/newStore",
+    },
+    {
+      lname: "Agregar Nuevo Producto",
+      url: "/dashboard/newProduct",
+    },
+  ];
+
+  useEffect(() => {
+    setPageLink(localStorage.getItem("aLink") || "Inicio")
+  })
+
+  return (
     <div className={styles.pageNavigate}>
       <div className={styles.pageMainLinks}>
-        <Link href="/"><a className="navigationLink">Inicio</a></Link>
-        <Link href="/"><a className="navigationLink">Tiendas</a></Link>
-        <Link href="/"><a className="navigationLink">Pedidos</a></Link>
-        <Link href="/"><a className="navigationLink">Configuracion</a></Link>
+        {mainLinks.map((link, index) => {
+          return (
+            <Link href={link.url} key={index}>
+              <a
+                className={
+                  pageLink === link.lname ? styles.activeLink : "navigationLink"
+                }
+                onClick={() => newPageLink(link.lname)}
+              >
+                {link.lname}
+              </a>
+            </Link>
+          );
+        })}
       </div>
       <div className={styles.pageMainLinks}>
-        <Link href="/"><a className="navigationLink">Agregar Nueva Tienda</a></Link>
-        <Link href="/"><a className="navigationLink">Agregar Nuevo Producto</a></Link>
+        {secondaryLinks.map((link, index) => {
+          return (
+            <Link href={link.url} key={index}>
+              <a
+                className={
+                  pageLink === link.lname ? styles.activeLink : "navigationLink"
+                }
+                onClick={() => newPageLink(link.lname)}
+              >
+                {link.lname}
+              </a>
+            </Link>
+          );
+        })}
       </div>
     </div>
-  )
+  );
 }
 
-export default PageNavigation
+export default PageNavigation;

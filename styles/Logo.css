@@ -1,0 +1,22 @@
+/* Logo CSS */
+.logo-face-white{
+  fill: none;
+  stroke: #fff;
+  stroke-width: 6px;
+}
+.logo-eye-white{
+  fill: none;
+  stroke: #fff;
+  stroke-width: 3px;
+}
+.logo-face-dark{
+  fill: none;
+  stroke: #000;
+  stroke-width: 6px;
+}
+.logo-eye-dark{
+  fill: none;
+  stroke: #000;
+  stroke-width: 3px;
+}
+/* Logo */
