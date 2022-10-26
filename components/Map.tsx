@@ -19,11 +19,12 @@ function Map() {
     const jsonStores = await storesData.json();
     setStores(jsonStores.stores);
   };
-
+  
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyCRrWXwt1eidGW-sK-5DdDU-nWYUoiLSkk",
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ? process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY : "",
     libraries: ["places"],
   });
+  
   const center = useMemo<LatLngLiteral>(
     () => ({ lat: 19.43, lng: -99.13 }),
     []
