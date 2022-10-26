@@ -9,15 +9,28 @@ import {
   MarkerClusterer,
 } from "@react-google-maps/api";
 
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng
+} from "use-places-autocomplete";
+
 type LatLngLiteral = google.maps.LatLngLiteral;
 type MapOptions = google.maps.MapOptions;
 
 function Map() {
-  const [stores, setStores] = useState([]);
+  const [stores, setStores] = useState<LatLngLiteral[]>([]);
   const getStores = async () => {
     const storesData = await fetch("http://127.0.0.1:8080/store/getAllStores");
     const jsonStores = await storesData.json();
-    setStores(jsonStores.stores);
+    let counter = 0;
+    for(var k in jsonStores.stores){
+      ++counter;
+      if(counter < 8){
+        const results = await getGeocode({address: jsonStores.stores[k].address});
+        const {lat, lng} = await getLatLng(results[0]);
+        setStores(stores => [...stores, {lat, lng}])
+      }
+    }
   };
   
   const { isLoaded } = useLoadScript({
@@ -50,7 +63,9 @@ function Map() {
       mapContainerClassName="card"
       options={options}
       mapContainerStyle={{ width: "100%" }}
-    ></GoogleMap>
+    >
+      {stores.map((store, index) => <Marker key={index} position={store} />)}
+    </GoogleMap>
   );
 }
 

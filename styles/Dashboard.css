@@ -69,7 +69,7 @@
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
   width: 100%;
   min-height: 335px;
-  max-height: 335px;
+  /* max-height: 335px; */
   padding: 16px;
   flex: 1;
   border-radius: 5px;

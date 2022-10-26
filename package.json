@@ -17,7 +17,8 @@
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.4.0",
-    "react-select": "^5.5.4"
+    "react-select": "^5.5.4",
+    "use-places-autocomplete": "^4.0.0"
   },
   "devDependencies": {
     "@types/node": "18.7.23",
