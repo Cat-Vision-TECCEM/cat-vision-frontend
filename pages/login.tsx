@@ -63,11 +63,11 @@ const Login: NextPage = () => {
           </svg>
           <h3>Bienvenido a Cat Vision</h3>
         </div>
-        <div className={styles.inputBox}>
+        <div className='inputBox'>
           <input type="email" required />
           <span>Correo</span>
         </div>
-        <div className={styles.inputBox}>
+        <div className='inputBox'>
           <input type="password" required />
           <span>Contraseña</span>
         </div>

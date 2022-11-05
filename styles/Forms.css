@@ -1,0 +1,87 @@
+.createContainer{
+  width: 100%;
+  min-height: 94vh;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.formContainer{
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.createStore{
+  width: 80%;
+  height: 630px;
+  background-color: #1D242E;
+  display: flex;
+  border-radius: 5px;
+}
+
+/* Inputs */
+.inputBox{
+  position: relative;
+  width: 75%;
+}
+.inputBox input{
+  width: 100%;
+  padding: 16px;
+  border: 1px solid  rgba(255, 255, 255, 0.4);
+  background: transparent;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  outline: none;
+  box-sizing: border-box;
+}
+.inputBox span{
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 16px;
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  transition: 0.5s;
+}
+
+.inputBox input:valid ~ span, .inputBox input:focus ~ span{
+  color: #38C9F2;
+  transform: translateX(10px) translateY(-7px);
+  font-size: 0.75em;
+  padding: 0 10px;
+  background: #1D242E;
+  border-left: 1px solid #38C9F2;
+  border-right: 1px solid #38C9F2;
+}
+.inputBox input:valid, .inputBox input:focus {
+  border: 1px solid #38C9F2;
+}
+
+input[type = "submit"]{
+  border: none;
+  outline: none;
+  width: 75%;
+  background: #38C9F2;
+  border-radius: 5px;
+  padding: 12px;
+  box-sizing: border-box;
+  cursor: pointer;
+  color: #fff;
+  font-size: 16px;
+  letter-spacing: 1.2px;
+  font-family: 'Kanit', sans-serif;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+input[type = "submit"]:hover{
+  background: #2cb1d6;
+  color: #1D242E;
+}
+/* input */

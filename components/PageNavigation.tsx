@@ -20,10 +20,6 @@ function PageNavigation() {
       url: "/dashboard/stores",
     },
     {
-      lname: "Pedidos",
-      url: "/dashboard/orders",
-    },
-    {
       lname: "Configuración",
       url: "/dashboard/settings",
     },

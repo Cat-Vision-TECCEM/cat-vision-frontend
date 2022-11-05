@@ -75,7 +75,7 @@ const stores: NextPage = () => {
   ];
 
   const getStores = async () => {
-    const storesData = await fetch("http://127.0.0.1:8080/store/getAllStores");
+    const storesData = await fetch(`${process.env.NEXT_PUBLIC_BACK_URL}store/getAllStores`);
     const jsonStores = await storesData.json();
     setStores(jsonStores.stores);
   };
@@ -96,12 +96,12 @@ const stores: NextPage = () => {
   const getData = async () => {
     const loadingData = toast.loading("Cargando Datos");
     const storeProducts = await fetch(
-      `http://127.0.0.1:8080/store/getProducts?store_id=${store.id}`
+      `${process.env.NEXT_PUBLIC_BACK_URL}store/getProducts?store_id=${store.id}`
     );
     const jsonProducts = await storeProducts.json();
     setProducts(jsonProducts.products);
     const salesData = await fetch(
-      `http://127.0.0.1:8080/order/getSalesProduct?start_month=${startMonth}&start_year=${startYear}&store_id=${store.id}&end_month=${endMonth}&end_year=${endYear}`
+      `${process.env.NEXT_PUBLIC_BACK_URL}order/getSalesProduct?start_month=${startMonth}&start_year=${startYear}&store_id=${store.id}&end_month=${endMonth}&end_year=${endYear}`
     );
     const salesJSON = await salesData.json();
     let counter = 0;
@@ -149,7 +149,7 @@ const stores: NextPage = () => {
     });
 
     const orderData = await fetch(
-      `http://127.0.0.1:8080/order/getOrders?store_id=${store.id}&company_id=${1}`
+      `${process.env.NEXT_PUBLIC_BACK_URL}order/getOrders?store_id=${store.id}&company_id=${1}`
     );
     const orderJSON = await orderData.json();
     setOrders(orderJSON.ordenes);
