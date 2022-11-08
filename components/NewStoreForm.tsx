@@ -43,9 +43,9 @@ function NewStoreForm({ setNewStore }: NewStoreProps) {
 
   const createStore = async (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
-    const creatingStore = toast.loading("Cargando Datos");
-    const values = value.split(',')
-    if (values.length > 4){
+    const creatingStore = toast.loading("Creando Tienda...");
+    const values = value.split(",");
+    if (values.length > 4) {
       const storeData = {
         name: values[0].trim(),
         state: values[4].trim(),
@@ -53,8 +53,8 @@ function NewStoreForm({ setNewStore }: NewStoreProps) {
         number: 0,
         city: values[3].trim(),
         lat: latitude,
-        lng: longitude
-      }
+        lng: longitude,
+      };
       await fetch(`${process.env.NEXT_PUBLIC_BACK_URL}store/create`, {
         method: "POST",
         headers: {
@@ -67,9 +67,9 @@ function NewStoreForm({ setNewStore }: NewStoreProps) {
       toast.success("Tienda Creada");
     } else {
       toast.dismiss(creatingStore);
-      toast.success("No se pudo crear la tienda en la dirección seleccionada!");
+      toast.error("No se pudo crear la tienda en la dirección seleccionada!");
     }
-  }
+  };
 
   return (
     <Fragment>
@@ -95,7 +95,11 @@ function NewStoreForm({ setNewStore }: NewStoreProps) {
           </div>
         )}
       </div>
-      <input type="submit" value="Crear Tienda" onClick={(e: React.MouseEvent<HTMLInputElement>) => createStore(e)}/>
+      <input
+        type="submit"
+        value="Crear Tienda"
+        onClick={(e: React.MouseEvent<HTMLInputElement>) => createStore(e)}
+      />
     </Fragment>
   );
 }

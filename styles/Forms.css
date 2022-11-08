@@ -20,6 +20,17 @@
   display: flex;
   border-radius: 5px;
 }
+.createProduct{
+  width: 50%;
+  height: 630px;
+  background-color: #1D242E;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  border-radius: 5px;
+}
 
 /* Inputs */
 .inputBox{
