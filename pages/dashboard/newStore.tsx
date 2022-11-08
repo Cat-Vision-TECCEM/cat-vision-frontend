@@ -7,11 +7,13 @@ import { useLoadScript } from "@react-google-maps/api";
 type LatLngLiteral = google.maps.LatLngLiteral;
 
 const newStore: NextPage = () => {
+  const [ libraries ] = useState<["places"]>(['places']);
+
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
       ? process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
       : "",
-    libraries: ["places"],
+    libraries,
   });
 
   return (

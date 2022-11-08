@@ -13,24 +13,25 @@ import {
   Marker,
 } from "@react-google-maps/api";
 
-import {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
-
 type LatLngLiteral = google.maps.LatLngLiteral;
 type MapOptions = google.maps.MapOptions;
 
 function Map({ newStore }: { newStore: boolean }) {
+
   const [stores, setStores] = useState<LatLngLiteral[]>([]);
+  const [store, setNewStore] = useState<LatLngLiteral>();
+  const mapRef = useRef<GoogleMap>();
+  
   const getStores = async () => {
+    let storesArray = []
     const storesData = await fetch(
       `${process.env.NEXT_PUBLIC_BACK_URL}store/getAllStores`
     );
-    const jsonStores = await storesData.json();    
+    const jsonStores = await storesData.json();
     for (var k in jsonStores.stores) {
-      setStores((stores) => [...stores, jsonStores.stores[k].address]);
+      storesArray.push(jsonStores.stores[k].address)
     }
+    setStores(storesArray)    
   };
 
   const center = useMemo<LatLngLiteral>(
@@ -46,6 +47,8 @@ function Map({ newStore }: { newStore: boolean }) {
     []
   );
 
+  const onLoad = useCallback((map: any) => (mapRef.current = map), [])
+
   useEffect(() => {
     getStores();
   }, []);
@@ -55,19 +58,27 @@ function Map({ newStore }: { newStore: boolean }) {
       {newStore && (
         <div className={styles.mapContainer}>
           <h1>Crea una nueva tienda</h1>
-          <NewStoreForm />
+          <NewStoreForm 
+            setNewStore = {(position) => {
+              setNewStore(position);
+              mapRef.current?.panTo(position);
+              console.log(mapRef);
+            }}
+          />
         </div>
       )}
       <GoogleMap
         zoom={12}
         center={center}
         mapContainerClassName="card"
+        onLoad= {onLoad}
         options={options}
         mapContainerStyle={{ width: "100%" }}
       >
         {stores.map((store, index) => (
           <Marker key={index} position={store} />
         ))}
+        {store && <Marker position={store} />}
       </GoogleMap>
     </Fragment>
   );
