@@ -6,6 +6,7 @@ const Login: NextPage = () => {
   const router = useRouter();
 
   const submitForm = () => {
+    localStorage.setItem("logedIn", "true");
     router.push('/dashboard');
   }
 

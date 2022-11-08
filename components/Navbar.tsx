@@ -1,11 +1,15 @@
 import styles from "../styles/Navbar.module.css";
-import { FaRegUser } from "react-icons/fa";
+import { FaRegUser, FaUserCircle } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 
 function Navbar() {
   const [menuClosed, setMenuClosed] = useState(true);
+  const [logedIn, setLogedIn] = useState(false);
+  const [loginPopoverClosed, setLoginPopoverClosed] = useState(true)
+  const router = useRouter();
 
   const menuToggle = () => {
     const menu = document.querySelector<HTMLElement>(
@@ -20,6 +24,30 @@ function Navbar() {
       setMenuClosed(true);
     }
   };
+
+  const Logout = () => {
+    localStorage.setItem("logedIn", "false");
+    router.push('/');
+  }
+
+  const loginToggle = () => {
+    const loginPopover = document.querySelector<HTMLElement>(
+      ".Navbar_navbarLogginPopover__pn4wB"
+    );
+
+    if(loginPopoverClosed){
+      loginPopover ? (loginPopover.style.display = "block") : console.log("login popover error");
+      setLoginPopoverClosed(false);
+    } else if(!loginPopoverClosed){
+      loginPopover ? (loginPopover.style.display = "none") : console.log("login popover error")
+      setLoginPopoverClosed(true);
+    }
+  }
+
+  useEffect(() => {
+    const loginState = localStorage.getItem("logedIn") === "true";
+    setLogedIn(loginState);
+  });
 
   return (
     <nav className={styles.navbar}>
@@ -75,25 +103,49 @@ function Navbar() {
           </svg>
           <h3>Cat Vision</h3>
         </div>
-        <div className={styles.navbarNavigation}>
-          <p>|</p>
-          <Link href={"/"}>
-            <a className="navigationLink">Inicio</a>
+        {!logedIn && (
+          <div className={styles.navbarNavigation}>
+            <p>|</p>
+            <Link href={"/"}>
+              <a className="navigationLink">Inicio</a>
+            </Link>
+            <a className="navigationLink">Productos</a>
+            <a className="navigationLink">Equipo</a>
+          </div>
+        )}
+      </div>
+      {!logedIn && (
+        <div className={styles.navbarRight}>
+          <FaRegUser className={styles.logginIcon} />
+          <Link href="/login">
+            <a className="navigationLink">Iniciar Sesión</a>
           </Link>
-          <a className="navigationLink">Productos</a>
-          <a className="navigationLink">Equipo</a>
+          <GiHamburgerMenu
+            className={styles.menuToggle}
+            onClick={() => menuToggle()}
+          />
         </div>
-      </div>
-      <div className={styles.navbarRight}>
-        <FaRegUser className={styles.logginIcon} />
-        <Link href="/login">
-          <a className="navigationLink">Iniciar Sesión</a>
-        </Link>
-        <GiHamburgerMenu
-          className={styles.menuToggle}
-          onClick={() => menuToggle()}
-        />
-      </div>
+      )}
+      {logedIn && (
+        <div className={styles.navbarLogedIn}>
+          <FaUserCircle
+            className={styles.logginIcon}
+            style={{ 
+              fontSize: "28px", 
+              marginRight: "48px",
+              cursor: "pointer",
+              color: "#fff"
+            }}
+            onClick={loginToggle}
+          />
+          <div className={styles.navbarLogginPopover} >
+            <ul>
+              <li>Configuración</li>
+              <li onClick={Logout} >Cerrar Sesión</li>
+            </ul>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

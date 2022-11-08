@@ -56,6 +56,7 @@ const newProduct: NextPage = () => {
       <PageNavigation />
       <form action="POST" className="formContainer">
         <div className="createProduct">
+          <h1 style={{color: "white"}} >Agrega tu nuevo producto</h1>
           <div className="inputBox">
             <input
               type="text"

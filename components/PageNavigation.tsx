@@ -19,10 +19,6 @@ function PageNavigation() {
       lname: "Tiendas",
       url: "/dashboard/stores",
     },
-    {
-      lname: "Configuración",
-      url: "/dashboard/settings",
-    },
   ];
 
   const secondaryLinks = [
