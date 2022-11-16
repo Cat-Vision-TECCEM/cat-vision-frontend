@@ -1,9 +1,38 @@
+import { useEffect } from 'react'
 import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { AiFillCheckCircle } from "react-icons/ai";
+import anime from "animejs/lib/anime.es.js";
 
 const Home: NextPage = () => {
+
+  useEffect(() => {
+    let homeAnimation = document.querySelector('.Home_homeAnimation__XpJ7S');
+    for(let i = 1; i <= 50; i++){
+      let dot = document.createElement('div');
+      dot.classList.add('animationElement');
+      homeAnimation?.appendChild(dot);
+    }
+
+    let dotAll = document.querySelectorAll('.animationElement');
+    console.log();
+    
+    
+    // if(dotAll){
+    //   let animation = anime.timeline({
+    //     targets: dotAll,
+    //     easing: "easeInOutExpo",
+    //     delay: anime.stagger(100, {grid: [10, 10], from: 'center'}),
+    //     loop: true
+    //   });
+    //   animation.add({
+    //     rotateZ: 100,
+    //   })
+    // }
+  }, [])
+  
+
   return (
     <div className={styles.container}>
       <Head>
@@ -19,6 +48,11 @@ const Home: NextPage = () => {
             <p style={{ marginTop: "32px" }}>
               Eficienta la interacción con tus clientes usando el poder de la IA
             </p>
+          </div>
+          <div className={styles.homeAnimation} >
+            <div className="animationElement"></div>
+            <div className="animationElement"></div>
+            <div className="animationElement"></div>
           </div>
         </section>
 

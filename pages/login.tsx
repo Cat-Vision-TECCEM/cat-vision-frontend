@@ -1,11 +1,42 @@
 import styles from "../styles/Login.module.css";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
+import React, { useState } from "react";
 
 const Login: NextPage = () => {
   const router = useRouter();
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [remember, setRemember] = useState(false);
 
-  const submitForm = () => {
+  const handdleUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUsername(e.target.value);
+  }
+  const handdlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  }
+  const handdleRemember = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setRemember(e.target.checked);
+  }
+
+  const submitForm = async(e: any) => {
+    e.preventDefault();
+    const loginValues = {
+      username: username,
+      password: password,
+    }
+    
+    // const loginFetch = await fetch(`${process.env.NEXT_PUBLIC_BACK_URL}user/login`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(loginValues)
+    // });
+    // const loginJSON = loginFetch.json();
+    // console.log(loginJSON);
+    
+
     localStorage.setItem("logedIn", "true");
     router.push('/dashboard');
   }
@@ -65,22 +96,20 @@ const Login: NextPage = () => {
           <h3>Bienvenido a Cat Vision</h3>
         </div>
         <div className='inputBox'>
-          <input type="email" required />
+          <input type="text" required onChange={handdleUsername} />
           <span>Correo</span>
         </div>
         <div className='inputBox'>
-          <input type="password" required />
+          <input type="password" required onChange={handdlePassword} />
           <span>Contraseña</span>
         </div>
         <div className={styles.formLinks}>
           <div>
             <label>
-              <input type="checkbox" id="remeberMe" /> Recuerdame{" "}
+              <input type="checkbox" id="remeberMe" onChange={handdleRemember}/> Recuerdame{" "}
             </label>
-            <br />
-            <a href="">¿Olvidaste la contraseña?</a>
           </div>
-          <a href="">Crear Cuenta</a>
+          <a href="">¿Olvidaste la contraseña?</a>
         </div>
         <input type="submit" value="Ingresar" onClick={submitForm}/>
       </form>

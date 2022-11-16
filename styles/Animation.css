@@ -1,0 +1,7 @@
+.animationElement{
+  position: relative;
+  width: 35px;
+  height: 35px;
+  background-color: #1D242E;
+  scale: 0.75;
+}

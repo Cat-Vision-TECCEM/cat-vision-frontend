@@ -16,6 +16,7 @@
   min-height: 70vh;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 80%;
   margin: 0 auto;
   position: relative;
@@ -126,6 +127,16 @@
 }
 .teamInfo p{
   text-align: center;
+}
+
+/* Home Animation */
+.homeAnimation{
+  max-width: 350px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 /* Responsive Width */
