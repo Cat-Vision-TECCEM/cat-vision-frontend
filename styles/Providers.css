@@ -1,0 +1,31 @@
+.provider-card {
+  width: 25%;
+  height: 70%;
+  background-color: #2e3846;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 35px;
+}
+
+.order-button {
+  background-color: #2cb1d6;
+  border-radius: 2px;
+  border: 1px solid #2cb1d6;
+  margin-top: 8px;
+  margin-bottom: 10px;
+  width: 100%;
+  color: #fff;
+}
+
+.order-button:hover {
+  background-color: #62c1db;
+}
+.provider-logo {
+  width: 100%;
+}
+
+.provider-card-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
