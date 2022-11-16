@@ -1,5 +1,3 @@
-import Image from 'next/image'
-
 function NewProviderCard() {
     const providersLogo = [
         {
@@ -35,13 +33,12 @@ function NewProviderCard() {
             src={props.src}
             alt={props.alt}
             />
-            <div>
-                <button className="order-button">Realizar pedido</button>
-            </div>
+            
+            <input type="submit" value="Realizar Pedido"></input>
         </div>
     ))
     return(
-        <div>
+        <div className="provider-card-container">
             {providerCard}
         </div>
     )}

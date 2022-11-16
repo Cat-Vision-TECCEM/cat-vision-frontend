@@ -1,11 +1,11 @@
 .provider-card {
-  width: 25%;
-  height: 70%;
+  width: 100%;
+  height: 100%;
   background-color: #2e3846;
   display: flex;
+  gap: 8px;
   flex-direction: column;
   align-items: center;
-  margin-top: 35px;
 }
 
 .order-button {
@@ -23,9 +23,13 @@
 }
 .provider-logo {
   width: 100%;
+  height: 65%;
 }
 
 .provider-card-container {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  width: 80%;
+  margin: 32px auto 0 auto;
 }

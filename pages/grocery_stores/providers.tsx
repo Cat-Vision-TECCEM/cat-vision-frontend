@@ -4,9 +4,7 @@ import NewProviderCard from "../../components/NewProviderCard"
 
 const providers: NextPage = () => {
     return(
-        <div>
-            <NewProviderCard/>
-        </div>
+        <NewProviderCard/>
     )
 }
 
