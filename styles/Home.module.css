@@ -1,3 +1,140 @@
-.container{
-  min-height: 110vh;
+.homeContainer{
+  min-height: 100vh;
+  width: 100%;
+}
+.homeMargin{
+  width: 80%;
+  min-height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* Home Info */
+.homeInfo{
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+  position: relative;
+}
+.homeContainer .characteristics p{
+  font-weight: 500;
+}
+.homeContainer h1{
+  margin: 0;
+  font-size: 45px;
+}
+.homeContainer p{
+  margin: 0;
+  font-weight: 300;
+  font-size: 20px;
+}
+
+/* Products */
+.productsContainer{
+  min-height: 100vh;
+  background-color: #1D242E;
+}
+.productsContainer h1{
+  color: #fff;
+  font-size: 32px;
+  padding-top: 45px;
+}
+.productsCards{
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 45px;
+}
+.productCard{
+  background-color: #fff;
+  border-radius: 5px;
+  flex: 1;
+  min-width: 350px;
+  max-width: 350px;
+  box-shadow: 0 0 10px rgb(255 255 255 / 45%);
+}
+.productHeader{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #EDF2F6;
+  padding: 30px;
+  border-radius: 5px 5px 0 0;
+}
+.productHeader .productLicense{
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.productHeader h2{
+  font-size: 38px;
+  font-weight: 700;
+}
+.productHeader .productDuration{
+  font-size: 16px;
+  font-weight: 300;
+}
+.productFeatures{
+  padding: 30px;
+}
+.productFeatures li{
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.productFeatures a{
+  font-weight: 300;
+}
+
+/* Team */
+.teamContainer{
+  min-height: 100vh;
+  width: 80%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 45px 0;
+  display: flex;
+  justify-content: space-around;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.teamCard{
+  width: 250px;
+  height: 330px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgb(0 0 0 / 60%);
+  display: flex;
+  flex-direction: column;
+}
+.teamInfo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  height: 130px;
+  box-sizing: border-box;
+}
+.teamInfo p{
+  text-align: center;
+}
+
+/* Responsive Width */
+@media (max-width: 700px) {
+  .homeContainer h1{
+    font-size: 32px;
+  }
+  .homeContainer p{
+    font-size: 16px;
+    margin-top: 16px !important;
+  }
 }

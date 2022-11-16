@@ -106,11 +106,9 @@ function Navbar() {
         {!logedIn && (
           <div className={styles.navbarNavigation}>
             <p>|</p>
-            <Link href={"/"}>
-              <a className="navigationLink">Inicio</a>
-            </Link>
-            <a className="navigationLink">Productos</a>
-            <a className="navigationLink">Equipo</a>
+            <a className="navigationLink" href="/#inicio">Inicio</a>
+            <a className="navigationLink" href="/#productos">Productos</a>
+            <a className="navigationLink" href="/#equipo">Equipo</a>
           </div>
         )}
       </div>
