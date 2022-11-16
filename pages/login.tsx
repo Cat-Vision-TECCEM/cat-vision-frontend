@@ -1,6 +1,7 @@
 import styles from "../styles/Login.module.css";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Login: NextPage = () => {
   const router = useRouter();
@@ -83,6 +84,9 @@ const Login: NextPage = () => {
           <a href="">Crear Cuenta</a>
         </div>
         <input type="submit" value="Ingresar" onClick={submitForm}/>
+        <Link href={"grocery_stores/providers"}>
+            <a className="navigationLink">Inicio de sesión tienditas</a>
+        </Link>
       </form>
     </div>
   );
