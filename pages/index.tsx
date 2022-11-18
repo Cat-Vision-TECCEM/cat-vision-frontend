@@ -1,37 +1,69 @@
-import { useEffect } from 'react'
+import { useEffect } from "react";
 import type { NextPage } from "next";
+import { useRef } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { AiFillCheckCircle } from "react-icons/ai";
-import anime from "animejs/lib/anime.es.js";
+import anime from "animejs";
 
 const Home: NextPage = () => {
+  var animateElement = [];
+  for (let i = 1; i <= 100; i++) {
+    animateElement.push(i);
+  }
 
   useEffect(() => {
-    let homeAnimation = document.querySelector('.Home_homeAnimation__XpJ7S');
-    for(let i = 1; i <= 50; i++){
-      let dot = document.createElement('div');
-      dot.classList.add('animationElement');
-      homeAnimation?.appendChild(dot);
-    }
+    let dotAll = document.querySelectorAll(".animationElement");
 
-    let dotAll = document.querySelectorAll('.animationElement');
-    console.log();
-    
-    
-    // if(dotAll){
-    //   let animation = anime.timeline({
-    //     targets: dotAll,
-    //     easing: "easeInOutExpo",
-    //     delay: anime.stagger(100, {grid: [10, 10], from: 'center'}),
-    //     loop: true
-    //   });
-    //   animation.add({
-    //     rotateZ: 100,
-    //   })
-    // }
-  }, [])
-  
+    if (dotAll !== undefined) {
+      const animation = anime.timeline({
+        targets: dotAll,
+        easing: "easeInOutExpo",
+        delay: anime.stagger(100, { grid: [10, 10], from: "center" }),
+        loop: true,
+      });
+      animation.add({
+        rotateZ: 180,
+        translateY: anime.stagger(-20, {
+          grid: [10, 10],
+          from: "center",
+          axis: "y",
+        }),
+        translateX: anime.stagger(-20, {
+          grid: [10, 10],
+          from: "center",
+          axis: "x",
+        }),
+        opacity: 1,
+      }).add({
+        borderRadius: 50,
+      }).add({
+        scale: 0.2
+      })
+      animation.add({
+        rotateZ: 180,
+        translateY: anime.stagger(0, {
+          grid: [10, 10],
+          from: "center",
+          axis: "y",
+        }),
+        translateX: anime.stagger(0, {
+          grid: [10, 10],
+          from: "center",
+          axis: "x",
+        }),
+        opacity: 1,
+      }).add({
+        scale: 1,
+        borderRadius: 0,
+        opacity: 0.2,
+      }).add({
+        opacity: 1,
+        rotateZ: -90,
+      })
+
+    }
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -49,10 +81,10 @@ const Home: NextPage = () => {
               Eficienta la interacción con tus clientes usando el poder de la IA
             </p>
           </div>
-          <div className={styles.homeAnimation} >
-            <div className="animationElement"></div>
-            <div className="animationElement"></div>
-            <div className="animationElement"></div>
+          <div className={styles.homeAnimation}>
+            {animateElement.map((index) => {
+              return <div className="animationElement" key={index}></div>;
+            })}
           </div>
         </section>
 
@@ -194,7 +226,9 @@ const Home: NextPage = () => {
               }}
             ></div>
             <div className={styles.teamInfo}>
-              <p style={{fontWeight: "400"}}>Diego Armando Ulibarri Hernández</p>
+              <p style={{ fontWeight: "400" }}>
+                Diego Armando Ulibarri Hernández
+              </p>
               <p>Front End Developer</p>
             </div>
           </div>
@@ -208,7 +242,9 @@ const Home: NextPage = () => {
               }}
             ></div>
             <div className={styles.teamInfo}>
-              <p style={{fontWeight: "400"}}>María Fernanda Ramírez Barragán</p>
+              <p style={{ fontWeight: "400" }}>
+                María Fernanda Ramírez Barragán
+              </p>
               <p>Front End Developer</p>
             </div>
           </div>
@@ -222,7 +258,7 @@ const Home: NextPage = () => {
               }}
             ></div>
             <div className={styles.teamInfo}>
-              <p style={{fontWeight: "400"}}>David Rodríguez Fragoso</p>
+              <p style={{ fontWeight: "400" }}>David Rodríguez Fragoso</p>
               <p>Back End Developer</p>
             </div>
           </div>
@@ -236,7 +272,7 @@ const Home: NextPage = () => {
               }}
             ></div>
             <div className={styles.teamInfo}>
-              <p style={{fontWeight: "400"}}>Erick Hernández Silva</p>
+              <p style={{ fontWeight: "400" }}>Erick Hernández Silva</p>
               <p>Back End Developer</p>
             </div>
           </div>
@@ -250,7 +286,7 @@ const Home: NextPage = () => {
               }}
             ></div>
             <div className={styles.teamInfo}>
-              <p style={{fontWeight: "400"}}>Eduardo Rodríguez López</p>
+              <p style={{ fontWeight: "400" }}>Eduardo Rodríguez López</p>
               <p>Back End Developer</p>
             </div>
           </div>
@@ -264,7 +300,7 @@ const Home: NextPage = () => {
               }}
             ></div>
             <div className={styles.teamInfo}>
-              <p style={{fontWeight: "400"}}>Israel Sánchez Miranda</p>
+              <p style={{ fontWeight: "400" }}>Israel Sánchez Miranda</p>
               <p>Machine Learning</p>
             </div>
           </div>
@@ -278,7 +314,7 @@ const Home: NextPage = () => {
               }}
             ></div>
             <div className={styles.teamInfo}>
-              <p style={{fontWeight: "400"}}>Liam Garay Monroy</p>
+              <p style={{ fontWeight: "400" }}>Liam Garay Monroy</p>
               <p>Machine Learning</p>
             </div>
           </div>
@@ -292,7 +328,7 @@ const Home: NextPage = () => {
               }}
             ></div>
             <div className={styles.teamInfo}>
-              <p style={{fontWeight: "400"}}>Raúl Youthan Irigoyen Osorio</p>
+              <p style={{ fontWeight: "400" }}>Raúl Youthan Irigoyen Osorio</p>
               <p>Machine Learning</p>
             </div>
           </div>
@@ -306,7 +342,9 @@ const Home: NextPage = () => {
               }}
             ></div>
             <div className={styles.teamInfo}>
-              <p style={{fontWeight: "400"}}>Octavio Andrick Sánchez Perusquia</p>
+              <p style={{ fontWeight: "400" }}>
+                Octavio Andrick Sánchez Perusquia
+              </p>
               <p>Developer</p>
             </div>
           </div>
@@ -320,7 +358,7 @@ const Home: NextPage = () => {
               }}
             ></div>
             <div className={styles.teamInfo}>
-              <p style={{fontWeight: "400"}}>Renata de Luna Flores</p>
+              <p style={{ fontWeight: "400" }}>Renata de Luna Flores</p>
               <p>Developer</p>
             </div>
           </div>
@@ -334,11 +372,10 @@ const Home: NextPage = () => {
               }}
             ></div>
             <div className={styles.teamInfo}>
-              <p style={{fontWeight: "400"}}>Roberto Valdez Jasso</p>
+              <p style={{ fontWeight: "400" }}>Roberto Valdez Jasso</p>
               <p>Developer</p>
             </div>
           </div>
-          
         </section>
       </div>
     </div>
