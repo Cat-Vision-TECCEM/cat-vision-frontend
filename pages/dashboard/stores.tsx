@@ -165,7 +165,7 @@ const stores: NextPage = () => {
     const userT = localStorage.getItem("type");
     setUserType(userT ? userT : "")
     if(userT === "company"){
-      getData();
+      getStores();
     }else if(userT === "store"){
       router.push("/grocery_stores/providers")
     }else{
