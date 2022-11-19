@@ -26,7 +26,7 @@ function Navbar() {
   };
 
   const Logout = () => {
-    localStorage.setItem("logedIn", "false");
+    localStorage.clear()
     router.push('/');
   }
 

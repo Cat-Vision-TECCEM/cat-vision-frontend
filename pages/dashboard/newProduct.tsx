@@ -1,9 +1,13 @@
 import { NextPage } from "next";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PageNavigation from "../../components/PageNavigation";
 import toast from "react-hot-toast";
+import { useRouter } from "next/router";
+
 
 const newProduct: NextPage = () => {
+  const router = useRouter()
+  const [userType, setUserType] = useState("");
   const [name, setName] = useState<string>("");
   const [price, setPrice] = useState<number>(0);
   const [sku, setSku] = useState<string>("");
@@ -39,6 +43,16 @@ const newProduct: NextPage = () => {
     }
   };
 
+  useEffect(() => {
+    const userT = localStorage.getItem("type");
+    setUserType(userT ? userT : "")
+    if(userT === "store"){
+      router.push("/grocery_stores/providers")
+    }else{
+      router.push("/login")
+    }
+  }, []);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.id === "sku") {
       setSku(e.target.value);
@@ -50,69 +64,73 @@ const newProduct: NextPage = () => {
       setImage(e.target.value);
     }
   };
+  if(userType === "company"){
 
-  return (
-    <div className="createContainer">
-      <PageNavigation />
-      <form action="POST" className="formContainer">
-        <div className="createProduct">
-          <h1 style={{color: "white"}} >Agrega tu nuevo producto</h1>
-          <div className="inputBox">
+    return (
+      <div className="createContainer">
+        <PageNavigation />
+        <form action="POST" className="formContainer">
+          <div className="createProduct">
+            <h1 style={{color: "white"}} >Agrega tu nuevo producto</h1>
+            <div className="inputBox">
+              <input
+                type="text"
+                required
+                id="sku"
+                onChange={handleChange}
+                value={sku}
+              />
+              <span>SKU</span>
+            </div>
+  
+            <div className="inputBox">
+              <input
+                type="text"
+                required
+                id="name"
+                onChange={handleChange}
+                value={name}
+              />
+              <span>Nombre</span>
+            </div>
+  
+            <div className="inputBox">
+              <input
+                type="number"
+                required
+                min={0}
+                id="price"
+                onChange={handleChange}
+                value={price}
+              />
+              <span>Precio</span>
+            </div>
+  
+            <div className="inputBox">
+              <input
+                type="text"
+                required
+                id="image"
+                onChange={handleChange}
+                value={image}
+              />
+              <span>Imagen</span>
+            </div>
+  
             <input
-              type="text"
-              required
-              id="sku"
-              onChange={handleChange}
-              value={sku}
+              type="submit"
+              value="Crear Tienda"
+              onClick={(e: React.MouseEvent<HTMLInputElement>) =>
+                createProduct(e)
+              }
             />
-            <span>SKU</span>
           </div>
-
-          <div className="inputBox">
-            <input
-              type="text"
-              required
-              id="name"
-              onChange={handleChange}
-              value={name}
-            />
-            <span>Nombre</span>
-          </div>
-
-          <div className="inputBox">
-            <input
-              type="number"
-              required
-              min={0}
-              id="price"
-              onChange={handleChange}
-              value={price}
-            />
-            <span>Precio</span>
-          </div>
-
-          <div className="inputBox">
-            <input
-              type="text"
-              required
-              id="image"
-              onChange={handleChange}
-              value={image}
-            />
-            <span>Imagen</span>
-          </div>
-
-          <input
-            type="submit"
-            value="Crear Tienda"
-            onClick={(e: React.MouseEvent<HTMLInputElement>) =>
-              createProduct(e)
-            }
-          />
-        </div>
-      </form>
-    </div>
-  );
+        </form>
+      </div>
+    );
+  }else {
+    return <p>Error!</p>
+  }
 };
 
 export default newProduct;

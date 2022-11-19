@@ -2,7 +2,8 @@ import styles from "../styles/Login.module.css";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import Link from "next/link";
+import toast from "react-hot-toast";
+
 
 const Login: NextPage = () => {
   const router = useRouter();
@@ -26,20 +27,31 @@ const Login: NextPage = () => {
       username: username,
       password: password,
     }
+    const loginFetch = await fetch(`${process.env.NEXT_PUBLIC_BACK_URL}user/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(loginValues)
+    });
+    const loginJSON = await loginFetch.json();
     
-    // const loginFetch = await fetch(`${process.env.NEXT_PUBLIC_BACK_URL}user/login`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(loginValues)
-    // });
-    // const loginJSON = loginFetch.json();
-    // console.log(loginJSON);
+    // toast.error("Usuario o Contraseña Incorrectos");
     
-
-    localStorage.setItem("logedIn", "true");
-    router.push('/dashboard');
+    
+    if(loginJSON.type === "company"){
+      localStorage.setItem("user", username)
+      localStorage.setItem("type", loginJSON.type)
+      localStorage.setItem("token", loginJSON.token)
+      localStorage.setItem("admin", loginJSON.is_admin)
+      localStorage.setItem("logedIn", "true");
+      router.push('/dashboard');
+    }else if (loginJSON.type === "store"){
+      localStorage.setItem("logedIn", "true");
+      localStorage.setItem("token", loginJSON.token)
+      localStorage.setItem("admin", loginJSON.is_admin)
+      router.push('/grocery_stores/providers');
+    }
   }
 
   return (
@@ -113,9 +125,6 @@ const Login: NextPage = () => {
           <a href="">¿Olvidaste la contraseña?</a>
         </div>
         <input type="submit" value="Ingresar" onClick={submitForm}/>
-        <Link href={"grocery_stores/providers"}>
-            <a className="navigationLink">Inicio de sesión tienditas</a>
-        </Link>
       </form>
     </div>
   );

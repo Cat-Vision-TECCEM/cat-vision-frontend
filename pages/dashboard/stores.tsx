@@ -8,6 +8,7 @@ import { FaMoneyBill } from "react-icons/fa";
 import toast from "react-hot-toast";
 import DoughnutChart from "../../components/DoughnutChart";
 import LineChart from "../../components/LineChart";
+import { useRouter } from "next/router";
 
 interface Store {
   id: number;
@@ -35,6 +36,8 @@ const stores: NextPage = () => {
     label: "Abarrotes La Diana",
     value: "Abarrotes La Diana",
   };
+  const [userType, setUserType] = useState("");
+  const router = useRouter()
 
   const today = new Date();
   const [stores, setStores] = useState([]);
@@ -159,122 +162,132 @@ const stores: NextPage = () => {
   };
 
   useEffect(() => {
-    getStores();
+    const userT = localStorage.getItem("type");
+    setUserType(userT ? userT : "")
+    if(userT === "company"){
+      getData();
+    }else if(userT === "store"){
+      router.push("/grocery_stores/providers")
+    }else{
+      router.push("/login")
+    }
   }, []);
 
-  return (
-    <div className="dashboardContainer">
-      <PageNavigation />
-      <div className="dashboardContentStore" style={{ paddingBottom: 0 }}>
-        <div className="filters">
-          <Select
-            options={stores}
-            instanceId={useId()}
-            isSearchable
-            onChange={(store) => setStore(store ? store : st)}
-            defaultValue={ st }
-          />
-          <div className="dashboardInputs">
-            <label htmlFor="">Fecha Inicio: </label>
-            <input
-              type="month"
-              min="2022-01"
-              value={startDate}
-              onChange={(e) => handleStartDateInput(e)}
-              required
+  if(userType === "company"){
+    return (
+      <div className="dashboardContainer">
+        <PageNavigation />
+        <div className="dashboardContentStore" style={{ paddingBottom: 0 }}>
+          <div className="filters">
+            <Select
+              options={stores}
+              instanceId={useId()}
+              isSearchable
+              onChange={(store) => setStore(store ? store : st)}
+              defaultValue={ st }
             />
+            <div className="dashboardInputs">
+              <label htmlFor="">Fecha Inicio: </label>
+              <input
+                type="month"
+                min="2022-01"
+                value={startDate}
+                onChange={(e) => handleStartDateInput(e)}
+                required
+              />
+            </div>
+            <div className="dashboardInputs">
+              <label htmlFor="">Fecha Fin: </label>
+              <input
+                type="month"
+                min="2022-01"
+                onChange={(e) => handleEndDateInput(e)}
+              />
+            </div>
+            <input type="submit" value="Filtrar" onClick={getData} />
           </div>
-          <div className="dashboardInputs">
-            <label htmlFor="">Fecha Fin: </label>
-            <input
-              type="month"
-              min="2022-01"
-              onChange={(e) => handleEndDateInput(e)}
-            />
-          </div>
-          <input type="submit" value="Filtrar" onClick={getData} />
-        </div>
-        <div className="card cardTop">
-          {earnings > 0 && (
-            <Fragment>
-              <div>
-                <FaMoneyBill />
-                <p>$ {earnings}</p>
-                <p>Ganancias Obtenidas</p>
-              </div>
-              <div></div>
-            </Fragment>
-          )}
-        </div>
-        <div className="card cardTop">
-          {totalSaleProducts > 0 && (
-            <Fragment>
-              <div>
-                <MdPointOfSale />
-                <p>{totalSaleProducts}</p>
-                <p>Productos Vendidos</p>
-              </div>
-              <div></div>
-            </Fragment>
-          )}
-        </div>
-      </div>
-
-      <div className="dashboardContentStore">
-        <div className="card twoSpaces">
-          {products.map((product, index) => {
-            return (
-              <div className="productChart" key={index}>
-                <Image
-                  loader={() => product.url}
-                  src={product.url}
-                  alt="Imagen producto"
-                  width={100}
-                  height={100}
-                  unoptimized
-                />
-                <div className="productChartInfo">
-                  <p>{product.name}</p>
-                  <p>
-                    Estado:
-                    {product.stock ? (
-                      <span style={{ color: "rgb(0, 255, 149)" }}>
-                        {" "}
-                        Existente
-                      </span>
-                    ) : (
-                      <span style={{ color: "red" }}> Agotado</span>
-                    )}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        <div className="card">
-          {orders.length > 0 && <p style={{fontSize: 20}}>Pedidos</p>}
-          {orders && orders.map((order, index) => {
-            return(
-              <div className="dashboardOrder" key={index}>
-                <p>A002134</p>
-                <p>{order.date}</p>
+          <div className="card cardTop">
+            {earnings > 0 && (
+              <Fragment>
                 <div>
-                  <p>$ {order.total}</p>
+                  <FaMoneyBill />
+                  <p>$ {earnings}</p>
+                  <p>Ganancias Obtenidas</p>
                 </div>
-              </div>
-            )
-          })}
+                <div></div>
+              </Fragment>
+            )}
+          </div>
+          <div className="card cardTop">
+            {totalSaleProducts > 0 && (
+              <Fragment>
+                <div>
+                  <MdPointOfSale />
+                  <p>{totalSaleProducts}</p>
+                  <p>Productos Vendidos</p>
+                </div>
+                <div></div>
+              </Fragment>
+            )}
+          </div>
         </div>
-        <div className="card">
-          {sales && <DoughnutChart chartData={sales} />}
+  
+        <div className="dashboardContentStore">
+          <div className="card twoSpaces">
+            {products.map((product, index) => {
+              return (
+                <div className="productChart" key={index}>
+                  <Image
+                    loader={() => product.url}
+                    src={product.url}
+                    alt="Imagen producto"
+                    width={100}
+                    height={100}
+                    unoptimized
+                  />
+                  <div className="productChartInfo">
+                    <p>{product.name}</p>
+                    <p>
+                      Estado:
+                      {product.stock ? (
+                        <span style={{ color: "rgb(0, 255, 149)" }}>
+                          {" "}
+                          Existente
+                        </span>
+                      ) : (
+                        <span style={{ color: "red" }}> Agotado</span>
+                      )}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="card">
+            {orders.length > 0 && <p style={{fontSize: 20}}>Pedidos</p>}
+            {orders && orders.map((order, index) => {
+              return(
+                <div className="dashboardOrder" key={index}>
+                  <p>A002134</p>
+                  <p>{order.date}</p>
+                  <div>
+                    <p>$ {order.total}</p>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+          <div className="card">
+            {sales && <DoughnutChart chartData={sales} />}
+          </div>
+          <div className="card">
+            {lineSales && <LineChart chartData={lineSales} />}
+          </div>
+          {/* <div className="card"></div> */}
         </div>
-        <div className="card">
-          {lineSales && <LineChart chartData={lineSales} />}
-        </div>
-        {/* <div className="card"></div> */}
       </div>
-    </div>
-  );
+    );
+  } else return <p>Error!</p>
 };
 
 export default stores;
