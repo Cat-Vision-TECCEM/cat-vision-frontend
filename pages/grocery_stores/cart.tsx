@@ -11,7 +11,9 @@ const cart: NextPage = () => {
   useEffect(() => {
     const userT = localStorage.getItem("type");
     setUserType(userT ? userT : "")
-    if(userT === "company"){
+    if(userT === "store"){
+
+    }else if(userT === "company"){
       router.push("/dashboard")
     }else{
       router.push("/login")

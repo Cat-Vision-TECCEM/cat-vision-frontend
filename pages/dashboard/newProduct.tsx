@@ -46,7 +46,9 @@ const newProduct: NextPage = () => {
   useEffect(() => {
     const userT = localStorage.getItem("type");
     setUserType(userT ? userT : "")
-    if(userT === "store"){
+    if(userT === "company"){
+
+    }else if(userT === "store"){
       router.push("/grocery_stores/providers")
     }else{
       router.push("/login")

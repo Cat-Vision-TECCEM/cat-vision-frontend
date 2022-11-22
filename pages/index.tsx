@@ -1,20 +1,27 @@
 import { useEffect } from "react";
 import type { NextPage } from "next";
-import { useRef } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { AiFillCheckCircle } from "react-icons/ai";
 import anime from "animejs";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
+  const router = useRouter();
   var animateElement = [];
   for (let i = 1; i <= 100; i++) {
     animateElement.push(i);
   }
 
   useEffect(() => {
-    let dotAll = document.querySelectorAll(".animationElement");
+    const userT = localStorage.getItem("type");
+    if (userT === "company") {
+      router.push("/dashboard");
+    } else if (userT === "store") {
+      router.push("/grocery_stores/providers");
+    }
 
+    let dotAll = document.querySelectorAll(".animationElement");
     if (dotAll !== undefined) {
       const animation = anime.timeline({
         targets: dotAll,
@@ -74,7 +81,7 @@ const Home: NextPage = () => {
       </Head>
       <div className={styles.homeContainer}>
         <section className={styles.homeInfo} id="inicio">
-          <div>
+          <div className={styles.homeTitles}>
             <h1 style={{ fontWeight: "300" }}>Cat Vision</h1>
             <h1>Sencillo, Moderno, Practico</h1>
             <p style={{ marginTop: "32px" }}>

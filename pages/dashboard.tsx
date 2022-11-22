@@ -6,10 +6,10 @@ import { useLoadScript } from "@react-google-maps/api";
 import { useRouter } from "next/router";
 
 const dashboard: NextPage = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [userType, setUserType] = useState("");
   const [orders, setOrders] = useState<any[]>([]);
-  const [ libraries ] = useState<["places"]>(['places']);
+  const [libraries] = useState<["places"]>(["places"]);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
       ? process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
@@ -17,9 +17,15 @@ const dashboard: NextPage = () => {
     libraries,
   });
 
-  const getData = async () => {
+  const getData = async (companyId: string, token: any) => {
     const orderData = await fetch(
-      `${process.env.NEXT_PUBLIC_BACK_URL}order/getOrders?company_id=${1}`
+      `${process.env.NEXT_PUBLIC_BACK_URL}order/getOrders?company_id=${1}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
     const orderJSON = await orderData.json();
     setOrders(orderJSON.ordenes);
@@ -27,17 +33,20 @@ const dashboard: NextPage = () => {
 
   useEffect(() => {
     const userT = localStorage.getItem("type");
-    setUserType(userT ? userT : "")
-    if(userT === "company"){
-      getData();
-    }else if(userT === "store"){
-      router.push("/grocery_stores/providers")
-    }else{
-      router.push("/login")
+    const companyId = localStorage.getItem("company_id");
+    const token = localStorage.getItem("token");
+
+    setUserType(userT ? userT : "");
+    if (userT === "company") {
+      getData(companyId || "15", token);
+    } else if (userT === "store") {
+      router.push("/grocery_stores/providers");
+    } else {
+      router.push("/login");
     }
   }, []);
 
-  if(userType === "company"){
+  if (userType === "company") {
     return (
       <div className="dashboardContainer">
         <PageNavigation />
@@ -66,8 +75,8 @@ const dashboard: NextPage = () => {
         </div>
       </div>
     );
-  } else{
-    return(<p>Error!</p>)
+  } else {
+    return <p>Error!</p>;
   }
 };
 

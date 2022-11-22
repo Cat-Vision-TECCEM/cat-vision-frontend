@@ -5,3 +5,8 @@
   background-color: #1D242E;
   scale: 0.75;
 }
+@media (max-width: 500px) {
+  .animationElement{
+    width: 35px;
+    height: 35px;  }
+}
