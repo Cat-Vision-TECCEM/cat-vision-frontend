@@ -101,6 +101,30 @@ input[type = "submit"]:hover{
   background: #2cb1d6;
   color: #1D242E;
 }
+
+input[type = "file"]{
+  display: none;
+}
+.fileInput{
+  border: none;
+  outline: none;
+  background: rgb(0, 197, 115);
+  min-width: 40%;
+  border-radius: 5px;
+  padding: 8px;
+  box-sizing: border-box;
+  cursor: pointer;
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 1px;
+  font-family: 'Kanit', sans-serif;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+.fileInput:hover{
+  background: rgb(0, 141, 82);
+  color: #1D242E;
+}
 /* input */
 
 .searchOptions{

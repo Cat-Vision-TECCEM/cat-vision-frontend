@@ -110,7 +110,7 @@ const Home: NextPage = () => {
                 <ul className={styles.productFeatures}>
                   <li>
                     <AiFillCheckCircle />
-                    <a href="#">2 mil tiendas</a>
+                    <a href="#">200 tiendas</a>
                   </li>
                   <li>
                     <AiFillCheckCircle />
@@ -146,7 +146,7 @@ const Home: NextPage = () => {
                 <ul className={styles.productFeatures}>
                   <li>
                     <AiFillCheckCircle />
-                    <a href="#">150 mil tiendas</a>
+                    <a href="#">2500 tiendas</a>
                   </li>
                   <li>
                     <AiFillCheckCircle />
@@ -186,7 +186,7 @@ const Home: NextPage = () => {
                 <ul className={styles.productFeatures}>
                   <li>
                     <AiFillCheckCircle />
-                    <a href="#">500 mil tiendas</a>
+                    <a href="#">7000 tiendas</a>
                   </li>
                   <li>
                     <AiFillCheckCircle />

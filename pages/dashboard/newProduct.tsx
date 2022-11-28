@@ -3,34 +3,33 @@ import React, { useState, useEffect } from "react";
 import PageNavigation from "../../components/PageNavigation";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
-
+import { spawn } from "child_process";
 
 const newProduct: NextPage = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [userType, setUserType] = useState("");
+  const [companyId, setCompanyId] = useState("");
   const [name, setName] = useState<string>("");
-  const [price, setPrice] = useState<number>(0);
+  const [price, setPrice] = useState<number>(3);
   const [sku, setSku] = useState<string>("");
-  const [image, setImage] = useState<string>("");
+  const [image, setImage] = useState<any>();
+  const [fileSelected, setFileSelected] = useState<boolean>(false);
 
   const createProduct = async (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
     const creatingProduct = toast.loading("Creando Producto...");
 
-    if (price > 0 && name.length > 3 && sku.length > 3 && image.length > 5) {
-      const productData = {
-        company_id: 1,
-        sku,
-        name,
-        selling_price: price,
-        image,
-      };
+    if (price > 3 && name.length > 3 && sku.length > 3) {
+      const productData = new FormData();
+      productData.append('company_id', companyId);
+      productData.append('sku', sku);
+      productData.append('name', name);
+      productData.append('selling_price', price.toString());
+      productData.append('image', image);
+
       await fetch(`${process.env.NEXT_PUBLIC_BACK_URL}product/create`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(productData),
+        body: productData,
       });
 
       toast.dismiss(creatingProduct);
@@ -45,13 +44,13 @@ const newProduct: NextPage = () => {
 
   useEffect(() => {
     const userT = localStorage.getItem("type");
-    setUserType(userT ? userT : "")
-    if(userT === "company"){
-
-    }else if(userT === "store"){
-      router.push("/grocery_stores/providers")
-    }else{
-      router.push("/login")
+    setCompanyId(localStorage.getItem("company_id") || "1");
+    setUserType(userT ? userT : "");
+    if (userT === "company") {
+    } else if (userT === "store") {
+      router.push("/grocery_stores/providers");
+    } else {
+      router.push("/login");
     }
   }, []);
 
@@ -63,17 +62,20 @@ const newProduct: NextPage = () => {
     } else if (e.target.id === "price") {
       setPrice(parseInt(e.target.value));
     } else if (e.target.id === "image") {
-      setImage(e.target.value);
+      if(e.target.files){
+        setFileSelected(true);
+        setImage(e.target.files[0]);
+      }
     }
   };
-  if(userType === "company"){
 
+  if (userType === "company") {
     return (
       <div className="createContainer">
         <PageNavigation />
         <form action="POST" className="formContainer">
           <div className="createProduct">
-            <h1 style={{color: "white"}} >Agrega tu nuevo producto</h1>
+            <h1 style={{ color: "white" }}>Agrega tu nuevo producto</h1>
             <div className="inputBox">
               <input
                 type="text"
@@ -84,7 +86,7 @@ const newProduct: NextPage = () => {
               />
               <span>SKU</span>
             </div>
-  
+
             <div className="inputBox">
               <input
                 type="text"
@@ -95,30 +97,25 @@ const newProduct: NextPage = () => {
               />
               <span>Nombre</span>
             </div>
-  
+
             <div className="inputBox">
               <input
                 type="number"
                 required
-                min={0}
+                min={3}
                 id="price"
                 onChange={handleChange}
                 value={price}
               />
               <span>Precio</span>
             </div>
-  
-            <div className="inputBox">
-              <input
-                type="text"
-                required
-                id="image"
-                onChange={handleChange}
-                value={image}
-              />
-              <span>Imagen</span>
-            </div>
-  
+
+            <label htmlFor="image" className="fileInput">
+              <input type="file" onChange={handleChange} id="image" required />
+              {fileSelected === false && <span>Añadir Imágen del producto</span> }
+              {fileSelected && <span>Imágen: {image.name}</span> }
+            </label>
+
             <input
               type="submit"
               value="Crear Tienda"
@@ -130,8 +127,8 @@ const newProduct: NextPage = () => {
         </form>
       </div>
     );
-  }else {
-    return <p>Error!</p>
+  } else {
+    return <p>Error!</p>;
   }
 };
 
