@@ -19,7 +19,7 @@ const dashboard: NextPage = () => {
 
   const getData = async (companyId: string, token: any) => {
     const orderData = await fetch(
-      `${process.env.NEXT_PUBLIC_BACK_URL}order/getOrders?company_id=${1}`,
+      `${process.env.NEXT_PUBLIC_BACK_URL}order/getOrders?company_id=${companyId}`,
       {
         method: "GET",
         headers: {
@@ -35,6 +35,7 @@ const dashboard: NextPage = () => {
     const userT = localStorage.getItem("type");
     const companyId = localStorage.getItem("company_id");
     const token = localStorage.getItem("token");
+    console.log(companyId);
 
     setUserType(userT ? userT : "");
     if (userT === "company") {

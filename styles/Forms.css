@@ -19,7 +19,13 @@
   background-color: #1D242E;
   display: flex;
   border-radius: 5px;
+  box-shadow: 0 0 15px rgb(0 0 0 / 30%);
 }
+.createStore .card{
+  box-shadow: none;
+  border-radius: 0 5px 5px 0;
+}
+
 .createProduct{
   width: 50%;
   height: 630px;
@@ -121,4 +127,48 @@ input[type = "submit"]:hover{
 }
 .searchOptions div:hover{
   background-color: rgb(218, 218, 218);
+}
+
+/* Responsive */
+@media (max-width: 950px) {
+  .createStore{
+    flex-direction: column;
+  }
+  .createProduct{
+    width: 80%;
+  }
+  .createStore .card{
+    border-radius: 0 0 5px 5px;
+  }
+}
+@media (max-width: 500px) {
+  .createStore{
+    width: 90%;
+  }
+  .createProduct{
+    width: 90%;
+  }
+  .createProduct h1{
+    font-size: 24px;
+  }
+  .createProduct .inputBox{
+    width: 90%;
+  }
+  .createProduct input[type = "submit"]{
+    width: 90%;
+  }
+  .Map_mapContainer__Ez3qn .inputBox{
+    width: 90%;
+  }
+  .Map_mapContainer__Ez3qn input[type = "submit"]{
+    width: 90%;
+  }
+}
+@media (max-height: 800px) {
+  .createStore{
+    margin: 16px 0;
+  }
+  .createProduct{
+    margin: 16px 0;
+  }
 }

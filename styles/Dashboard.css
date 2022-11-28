@@ -75,6 +75,7 @@
   border-radius: 5px;
   background-color: #1D242E;
   box-sizing: border-box;
+  overflow: auto;
 }
 .cardTop{
   max-height: 170px !important;

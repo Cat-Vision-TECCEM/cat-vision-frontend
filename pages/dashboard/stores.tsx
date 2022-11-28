@@ -156,7 +156,9 @@ const stores: NextPage = () => {
     });
 
     const orderData = await fetch(
-      `${process.env.NEXT_PUBLIC_BACK_URL}order/getOrders?store_id=${store.id}&company_id=${1}`,
+      `${process.env.NEXT_PUBLIC_BACK_URL}order/getOrders?store_id=${
+        store.id
+      }&company_id=${companyId}`,
       {
         method: "GET",
         headers: {
