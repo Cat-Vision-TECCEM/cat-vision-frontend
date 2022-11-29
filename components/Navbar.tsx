@@ -8,6 +8,7 @@ import Link from "next/link";
 function Navbar() {
   const [menuClosed, setMenuClosed] = useState(true);
   const [logedIn, setLogedIn] = useState(false);
+  const [admin, setAdmin] = useState<boolean>(false);
   const [loginPopoverClosed, setLoginPopoverClosed] = useState(true)
   const router = useRouter();
 
@@ -30,6 +31,11 @@ function Navbar() {
     router.push('/');
   }
 
+  const NewUser = () => {
+    localStorage.setItem("aLink", "");
+    router.push('/user/create');
+  }
+
   const loginToggle = () => {
     const loginPopover = document.querySelector<HTMLElement>(
       ".Navbar_navbarLogginPopover__pn4wB"
@@ -46,6 +52,8 @@ function Navbar() {
 
   useEffect(() => {
     const loginState = localStorage.getItem("logedIn") === "true";
+    const getAdmin = localStorage.getItem("admin") === "true";
+    setAdmin(getAdmin)
     setLogedIn(loginState);
   });
 
@@ -136,9 +144,15 @@ function Navbar() {
             }}
             onClick={loginToggle}
           />
-          <div className={styles.navbarLogginPopover} >
+          <div className={styles.navbarLogginPopover}>
             <ul>
               <li>Configuración</li>
+              {admin &&
+                <li onClick={NewUser}>
+                  Nuevo Usuario
+                </li>
+              }
+              <li>Reportar Error</li>
               <li onClick={Logout} >Cerrar Sesión</li>
             </ul>
           </div>

@@ -35,7 +35,6 @@ const dashboard: NextPage = () => {
     const userT = localStorage.getItem("type");
     const companyId = localStorage.getItem("company_id");
     const token = localStorage.getItem("token");
-    console.log(companyId);
 
     setUserType(userT ? userT : "");
     if (userT === "company") {

@@ -4,9 +4,11 @@ import PageNavigation from "../../components/PageNavigation";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import { spawn } from "child_process";
+import { json } from "stream/consumers";
 
 const newProduct: NextPage = () => {
   const router = useRouter();
+  const [token, setToken] = useState("");
   const [userType, setUserType] = useState("");
   const [companyId, setCompanyId] = useState("");
   const [name, setName] = useState<string>("");
@@ -26,14 +28,26 @@ const newProduct: NextPage = () => {
       productData.append('name', name);
       productData.append('selling_price', price.toString());
       productData.append('image', image);
+      console.log(token);
 
-      await fetch(`${process.env.NEXT_PUBLIC_BACK_URL}product/create`, {
+      const createProduct = await fetch(`${process.env.NEXT_PUBLIC_BACK_URL}product/create`, {
         method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         body: productData,
       });
 
+      const jsonCreateProduct = await createProduct.json();
       toast.dismiss(creatingProduct);
-      toast.success("Producto Creado");
+      if(jsonCreateProduct.error){
+        toast.error(
+          jsonCreateProduct.error
+        );
+      }else{
+        toast.success(jsonCreateProduct.success);
+      }
+      
     } else {
       toast.dismiss(creatingProduct);
       toast.error(
@@ -44,6 +58,8 @@ const newProduct: NextPage = () => {
 
   useEffect(() => {
     const userT = localStorage.getItem("type");
+    const token = localStorage.getItem("token");
+    setToken(token || "");
     setCompanyId(localStorage.getItem("company_id") || "1");
     setUserType(userT ? userT : "");
     if (userT === "company") {
@@ -118,7 +134,7 @@ const newProduct: NextPage = () => {
 
             <input
               type="submit"
-              value="Crear Tienda"
+              value="Crear Producto"
               onClick={(e: React.MouseEvent<HTMLInputElement>) =>
                 createProduct(e)
               }
