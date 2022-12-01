@@ -5,7 +5,12 @@ function ProductQuantity() {
   const [quantity, setQuantity] = useState(1);
 
   function less(quantity: number) {
-    const lessProduct = quantity - 1;
+    var lessProduct = quantity;
+    if (quantity >= 1) {
+      lessProduct = quantity - 1;
+    } else {
+      lessProduct = quantity;
+    }
     setQuantity(lessProduct);
   }
 
