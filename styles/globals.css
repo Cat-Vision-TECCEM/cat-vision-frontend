@@ -4,14 +4,16 @@
 @import "./NavigationLinks.css";
 @import "./Forms.css";
 @import "./Providers.css";
+@import "./NewProduct.css";
+@import "./Cart.css";
 
 html,
 body {
   min-height: 100vh;
   padding: 0;
   margin: 0;
-  font-family: 'Kanit', sans-serif;
-  background-color: #EDF2F6;
+  font-family: "Kanit", sans-serif;
+  background-color: #edf2f6;
   scroll-behavior: smooth;
 }
 a {

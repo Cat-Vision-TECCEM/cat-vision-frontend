@@ -1,10 +1,11 @@
 import { NextPage } from "next";
-import React, { useState } from "react";
+import React, { useState, useId, useEffect } from "react";
 import GroceriesNavigation from "../../components/GroceriesNavigation";
-import NewProductCart from "../../components/NewProductCart";
 import { useRouter } from "next/router";
+import NewProduct from "../../components/NewProduct";
+import Select from "react-select";
 
-const cart: NextPage = () => {
+const products_list: NextPage = () => {
   const [userType, setUserType] = useState("");
   const router = useRouter();
 
@@ -24,19 +25,12 @@ const cart: NextPage = () => {
   return (
     <div>
       <GroceriesNavigation />
-      <div className="cart-container">
-        <h1>Carrito</h1>
-        <hr />
-        <div>
-          <NewProductCart />
-        </div>
-        <div>
-          <a className="total">Total: $0</a>
-        </div>
+      <div>
+        <NewProduct />
       </div>
     </div>
   );
   //}else return <p>Error!</p>
 };
 
-export default cart;
+export default products_list;
