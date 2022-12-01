@@ -1,36 +1,51 @@
 import { NextPage } from "next";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PageNavigation from "../../components/PageNavigation";
 import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 const newProduct: NextPage = () => {
+  const router = useRouter();
+  const [token, setToken] = useState("");
+  const [userType, setUserType] = useState("");
+  const [companyId, setCompanyId] = useState("");
   const [name, setName] = useState<string>("");
-  const [price, setPrice] = useState<number>(0);
+  const [price, setPrice] = useState<number>(3);
   const [sku, setSku] = useState<string>("");
-  const [image, setImage] = useState<string>("");
+  const [image, setImage] = useState<any>();
+  const [fileSelected, setFileSelected] = useState<boolean>(false);
 
   const createProduct = async (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
     const creatingProduct = toast.loading("Creando Producto...");
 
-    if (price > 0 && name.length > 3 && sku.length > 3 && image.length > 5) {
-      const productData = {
-        company_id: 1,
-        sku,
-        name,
-        selling_price: price,
-        image,
-      };
-      await fetch(`${process.env.NEXT_PUBLIC_BACK_URL}product/create`, {
+    if (price > 3 && name.length > 3 && sku.length > 3) {
+      const productData = new FormData();
+      productData.append('company_id', companyId);
+      productData.append('sku', sku);
+      productData.append('name', name);
+      productData.append('selling_price', price.toString());
+      productData.append('image', image);
+      console.log(token);
+
+      const createProduct = await fetch(`${process.env.NEXT_PUBLIC_BACK_URL}product/create`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(productData),
+        body: productData,
       });
 
+      const jsonCreateProduct = await createProduct.json();
       toast.dismiss(creatingProduct);
-      toast.success("Producto Creado");
+      if(jsonCreateProduct.error){
+        toast.error(
+          jsonCreateProduct.error
+        );
+      }else{
+        toast.success(jsonCreateProduct.success);
+      }
+      
     } else {
       toast.dismiss(creatingProduct);
       toast.error(
@@ -38,6 +53,20 @@ const newProduct: NextPage = () => {
       );
     }
   };
+
+  useEffect(() => {
+    const userT = localStorage.getItem("type");
+    const token = localStorage.getItem("token");
+    setToken(token || "");
+    setCompanyId(localStorage.getItem("company_id") || "1");
+    setUserType(userT ? userT : "");
+    if (userT === "company") {
+    } else if (userT === "store") {
+      router.push("/grocery_stores/providers");
+    } else {
+      router.push("/login");
+    }
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.id === "sku") {
@@ -47,72 +76,74 @@ const newProduct: NextPage = () => {
     } else if (e.target.id === "price") {
       setPrice(parseInt(e.target.value));
     } else if (e.target.id === "image") {
-      setImage(e.target.value);
+      if(e.target.files){
+        setFileSelected(true);
+        setImage(e.target.files[0]);
+      }
     }
   };
 
-  return (
-    <div className="createContainer">
-      <PageNavigation />
-      <form action="POST" className="formContainer">
-        <div className="createProduct">
-          <h1 style={{color: "white"}} >Agrega tu nuevo producto</h1>
-          <div className="inputBox">
-            <input
-              type="text"
-              required
-              id="sku"
-              onChange={handleChange}
-              value={sku}
-            />
-            <span>SKU</span>
-          </div>
+  if (userType === "company") {
+    return (
+      <div className="createContainer">
+        <PageNavigation />
+        <form action="POST" className="formContainer">
+          <div className="createProduct">
+            <h1 style={{ color: "white" }}>Agrega tu nuevo producto</h1>
+            <div className="inputBox">
+              <input
+                type="text"
+                required
+                id="sku"
+                onChange={handleChange}
+                value={sku}
+              />
+              <span>SKU</span>
+            </div>
 
-          <div className="inputBox">
-            <input
-              type="text"
-              required
-              id="name"
-              onChange={handleChange}
-              value={name}
-            />
-            <span>Nombre</span>
-          </div>
+            <div className="inputBox">
+              <input
+                type="text"
+                required
+                id="name"
+                onChange={handleChange}
+                value={name}
+              />
+              <span>Nombre</span>
+            </div>
 
-          <div className="inputBox">
-            <input
-              type="number"
-              required
-              min={0}
-              id="price"
-              onChange={handleChange}
-              value={price}
-            />
-            <span>Precio</span>
-          </div>
+            <div className="inputBox">
+              <input
+                type="number"
+                required
+                min={3}
+                id="price"
+                onChange={handleChange}
+                value={price}
+              />
+              <span>Precio</span>
+            </div>
 
-          <div className="inputBox">
-            <input
-              type="text"
-              required
-              id="image"
-              onChange={handleChange}
-              value={image}
-            />
-            <span>Imagen</span>
-          </div>
+            <label htmlFor="image" className="fileInput">
+              <input type="file" onChange={handleChange} id="image" required />
+              {fileSelected === false && <span>Añadir Imágen del producto</span> }
+              {fileSelected && <span>Imágen: {image.name}</span> }
+            </label>
 
-          <input
-            type="submit"
-            value="Crear Tienda"
-            onClick={(e: React.MouseEvent<HTMLInputElement>) =>
-              createProduct(e)
-            }
-          />
-        </div>
-      </form>
-    </div>
-  );
+            <input
+              type="submit"
+              value="Crear Producto"
+              onClick={(e: React.MouseEvent<HTMLInputElement>) =>
+                createProduct(e)
+              }
+            />
+          </div>
+        </form>
+      </div>
+    );
+  } else {
+    return <p>Error!</p>;
+  }
 };
 
 export default newProduct;

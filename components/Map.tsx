@@ -57,7 +57,7 @@ function Map({ newStore }: { newStore: boolean }) {
     <Fragment>
       {newStore && (
         <div className={styles.mapContainer}>
-          <h1>Crea una nueva tienda</h1>
+          <h1>Solicita una nueva tienda</h1>
           <NewStoreForm 
             setNewStore = {(position) => {
               setNewStore(position);

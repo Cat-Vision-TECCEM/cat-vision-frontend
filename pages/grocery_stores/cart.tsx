@@ -1,26 +1,9 @@
 import { NextPage } from "next";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import GroceriesNavigation from "../../components/GroceriesNavigation";
 import NewProductCart from "../../components/NewProductCart";
-import { useRouter } from "next/router";
 
 const cart: NextPage = () => {
-  const [userType, setUserType] = useState("");
-  const router = useRouter();
-
-  /*useEffect(() => {
-  const userT = localStorage.getItem("type");
-  setUserType(userT ? userT : "")
-  if(userT === "store"){
-
-  }else if(userT === "company"){
-    router.push("/dashboard")
-  }else{
-    router.push("/login")
-    }
-  }, []);*/
-
-  //if(userType === "store"){
   return (
     <div>
       <GroceriesNavigation />
@@ -36,7 +19,6 @@ const cart: NextPage = () => {
       </div>
     </div>
   );
-  //}else return <p>Error!</p>
 };
 
 export default cart;

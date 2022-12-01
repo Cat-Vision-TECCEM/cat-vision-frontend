@@ -67,7 +67,7 @@ function NewStoreForm({ setNewStore }: NewStoreProps) {
       toast.success("Tienda Creada");
     } else {
       toast.dismiss(creatingStore);
-      toast.error("No se pudo crear la tienda en la dirección seleccionada!");
+      toast.error("No se pudo solicitar la tienda en la dirección seleccionada!");
     }
   };
 
@@ -97,7 +97,7 @@ function NewStoreForm({ setNewStore }: NewStoreProps) {
       </div>
       <input
         type="submit"
-        value="Crear Tienda"
+        value="Solicitar Tienda"
         onClick={(e: React.MouseEvent<HTMLInputElement>) => createStore(e)}
       />
     </Fragment>

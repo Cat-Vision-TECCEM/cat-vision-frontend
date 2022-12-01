@@ -7,11 +7,58 @@ import Link from "next/link";
 
 const Login: NextPage = () => {
   const router = useRouter();
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [remember, setRemember] = useState(false);
 
-  const submitForm = () => {
-    localStorage.setItem("logedIn", "true");
-    router.push('/dashboard');
-  }
+  const handdleUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUsername(e.target.value);
+  };
+  const handdlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+  const handdleRemember = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setRemember(e.target.checked);
+  };
+
+  const submitForm = async (e: any) => {
+    e.preventDefault();
+    const loginValues = {
+      username: username,
+      password: password,
+    };
+    const loginFetch = await fetch(
+      `${process.env.NEXT_PUBLIC_BACK_URL}user/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loginValues),
+      }
+    );
+    const loginJSON = await loginFetch.json();
+    console.log(loginJSON);
+    
+
+    // toast.error("Usuario o Contraseña Incorrectos");
+    if (loginJSON.type === "company") {
+      localStorage.setItem("user", username);
+      localStorage.setItem("company_id", loginJSON.store_or_company_id);
+      localStorage.setItem("type", loginJSON.type);
+      localStorage.setItem("token", loginJSON.token);
+      localStorage.setItem("admin", loginJSON.is_admin);
+      localStorage.setItem("logedIn", "true");
+      router.push("/dashboard");
+    } else if (loginJSON.type === "store") {
+      localStorage.setItem("user", username);
+      localStorage.setItem("store_id", loginJSON.store_or_company_id);
+      localStorage.setItem("token", loginJSON.token);
+      localStorage.setItem("admin", loginJSON.is_admin);
+      localStorage.setItem("logedIn", "true");
+      router.push("/grocery_stores/providers");
+    }
+  };
 
   return (
     <div className={styles.formPage}>
@@ -67,28 +114,28 @@ const Login: NextPage = () => {
           </svg>
           <h3>Bienvenido a Cat Vision</h3>
         </div>
-        <div className='inputBox'>
-          <input type="email" required />
-          <span>Correo</span>
+        <div className="inputBox">
+          <input type="text" required onChange={handdleUsername} />
+          <span>Usuario</span>
         </div>
-        <div className='inputBox'>
-          <input type="password" required />
+        <div className="inputBox">
+          <input type="password" required onChange={handdlePassword} />
           <span>Contraseña</span>
         </div>
         <div className={styles.formLinks}>
           <div>
             <label>
-              <input type="checkbox" id="remeberMe" /> Recuerdame{" "}
+              <input
+                type="checkbox"
+                id="remeberMe"
+                onChange={handdleRemember}
+              />{" "}
+              Recuerdame{" "}
             </label>
-            <br />
-            <a href="">¿Olvidaste la contraseña?</a>
           </div>
-          <a href="">Crear Cuenta</a>
+          <a href="">¿Olvidaste la contraseña?</a>
         </div>
-        <input type="submit" value="Ingresar" onClick={submitForm}/>
-        <Link href={"grocery_stores/providers"}>
-            <a className="navigationLink">Inicio de sesión tienditas</a>
-        </Link>
+        <input type="submit" value="Ingresar" onClick={submitForm} />
       </form>
     </div>
   );
