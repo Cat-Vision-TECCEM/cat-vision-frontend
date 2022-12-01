@@ -308,7 +308,7 @@ const Home: NextPage = () => {
             ></div>
             <div className={styles.teamInfo}>
               <p style={{ fontWeight: "400" }}>Israel Sánchez Miranda</p>
-              <p>Machine Learning</p>
+              <p>Project Manager</p>
             </div>
           </div>
           <div className={styles.teamCard}>
@@ -322,7 +322,7 @@ const Home: NextPage = () => {
             ></div>
             <div className={styles.teamInfo}>
               <p style={{ fontWeight: "400" }}>Liam Garay Monroy</p>
-              <p>Machine Learning</p>
+              <p>Machine Learning Engineer</p>
             </div>
           </div>
           <div className={styles.teamCard}>
@@ -336,7 +336,7 @@ const Home: NextPage = () => {
             ></div>
             <div className={styles.teamInfo}>
               <p style={{ fontWeight: "400" }}>Raúl Youthan Irigoyen Osorio</p>
-              <p>Machine Learning</p>
+              <p>Machine Learning Engineer</p>
             </div>
           </div>
           <div className={styles.teamCard}>
@@ -352,7 +352,7 @@ const Home: NextPage = () => {
               <p style={{ fontWeight: "400" }}>
                 Octavio Andrick Sánchez Perusquia
               </p>
-              <p>Developer</p>
+              <p>Hardware Developer</p>
             </div>
           </div>
           <div className={styles.teamCard}>
@@ -366,7 +366,7 @@ const Home: NextPage = () => {
             ></div>
             <div className={styles.teamInfo}>
               <p style={{ fontWeight: "400" }}>Renata de Luna Flores</p>
-              <p>Developer</p>
+              <p>Prototype and User developer</p>
             </div>
           </div>
           <div className={styles.teamCard}>
@@ -380,7 +380,7 @@ const Home: NextPage = () => {
             ></div>
             <div className={styles.teamInfo}>
               <p style={{ fontWeight: "400" }}>Roberto Valdez Jasso</p>
-              <p>Developer</p>
+              <p>Hardware Developer</p>
             </div>
           </div>
         </section>

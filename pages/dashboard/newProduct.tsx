@@ -3,8 +3,6 @@ import React, { useState, useEffect } from "react";
 import PageNavigation from "../../components/PageNavigation";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
-import { spawn } from "child_process";
-import { json } from "stream/consumers";
 
 const newProduct: NextPage = () => {
   const router = useRouter();

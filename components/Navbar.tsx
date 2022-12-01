@@ -36,6 +36,11 @@ function Navbar() {
     router.push('/user/create');
   }
 
+  const reportBug = () => {
+    localStorage.setItem("aLink", "");
+    router.push('/user/bugs');
+  }
+
   const loginToggle = () => {
     const loginPopover = document.querySelector<HTMLElement>(
       ".Navbar_navbarLogginPopover__pn4wB"
@@ -152,7 +157,7 @@ function Navbar() {
                   Nuevo Usuario
                 </li>
               }
-              <li>Reportar Error</li>
+              <li onClick={reportBug} >Reportar Error</li>
               <li onClick={Logout} >Cerrar Sesión</li>
             </ul>
           </div>

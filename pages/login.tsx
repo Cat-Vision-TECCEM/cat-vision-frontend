@@ -36,6 +36,8 @@ const Login: NextPage = () => {
       }
     );
     const loginJSON = await loginFetch.json();
+    console.log(loginJSON);
+    
 
     // toast.error("Usuario o Contraseña Incorrectos");
     if (loginJSON.type === "company") {
@@ -112,7 +114,7 @@ const Login: NextPage = () => {
         </div>
         <div className="inputBox">
           <input type="text" required onChange={handdleUsername} />
-          <span>Correo</span>
+          <span>Usuario</span>
         </div>
         <div className="inputBox">
           <input type="password" required onChange={handdlePassword} />

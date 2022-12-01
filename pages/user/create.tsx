@@ -19,9 +19,10 @@ const create: NextPage = () => {
   const createUser = async (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
     const creatingUser = toast.loading("Creando Usuario...");
+    console.log(companyId)
 
     const userData = {
-      store_or_company_id: companyId,
+      store_or_company_id: parseInt(companyId),
       username: username,
       email: email,
       password: password,
@@ -66,7 +67,7 @@ const create: NextPage = () => {
     const getCompanyId = localStorage.getItem("company_id")
     const getAdmin = localStorage.getItem("admin") === "true";
     const token = localStorage.getItem("token");
-    setCompanyId(localStorage.getItem("company_id") || "2");
+    setCompanyId(getCompanyId || "1");
     setAdmin(getAdmin)
     setToken(token || "");
     if (!getAdmin) {
@@ -111,7 +112,7 @@ const create: NextPage = () => {
               />
               <span>Contraseña</span>
             </div>
-            <div>
+            <div style={{color: "white"}}>
               <input
                 type="checkbox"
                 id="isAdmin"
