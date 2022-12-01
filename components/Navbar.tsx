@@ -122,6 +122,7 @@ function Navbar() {
             <a className="navigationLink" href="/#inicio">Inicio</a>
             <a className="navigationLink" href="/#productos">Productos</a>
             <a className="navigationLink" href="/#equipo">Equipo</a>
+            <a className="navigationLink" href="/grocery_stores/providers">Grocery</a>
           </div>
         )}
       </div>
