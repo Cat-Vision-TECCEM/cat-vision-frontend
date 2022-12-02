@@ -17,6 +17,11 @@ const cart: NextPage = () => {
           <a className="total">Total: $44</a>
         </div>
       </div>
+      <div>
+        <button className="add-button" type="submit">
+          Finalizar pedido
+        </button>
+      </div>
     </div>
   );
 };

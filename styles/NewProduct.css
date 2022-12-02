@@ -42,7 +42,8 @@
 .add-button {
   background-color: #2cb1d6;
   border-radius: 5px;
-  margin-left: 8px;
+  margin-top: 10px;
+  margin-left: 2.5%;
   width: 90%;
   color: #fff;
 }
