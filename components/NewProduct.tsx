@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { useState, useEffect } from "react";
-
+import { useState, useEffect, useId } from "react";
 import ProductQuantity from "./ProductQuantity";
 
 function NewProduct() {
@@ -12,7 +11,7 @@ function NewProduct() {
       company_id: 1,
     };
     const storeProducts = await fetch(
-      `${process.env.NEXT_PUBLIC_BACK_URL}nuc/get-products`,
+      `${process.env.NEXT_PUBLIC_BACK_URL}product/get-all`,
       {
         method: "POST",
         headers: {
@@ -29,93 +28,79 @@ function NewProduct() {
     getData();
   }, []);
 
-  function addToCart(name: string) {
-    return { name: name };
+  function addToCart(
+    id: number,
+    src: string,
+    alt: string,
+    name: string,
+    total: number,
+    quantity: number
+  ) {
+    const productCart = {
+      id: id,
+      src: src,
+      alt: alt,
+      name: name,
+      total: total,
+      quantity: quantity,
+    };
+    return productCart;
   }
 
-  // if (products) {
-  //   const newProductCard = products.map((product) => (
-  //     <div className="new-product-card">
-  //       <div className="product-panel">
-  //         <div className="product-container">
-  //           <img
-  //             className="product-image"
-  //             src={product.src}
-  //             alt={product.alt}
-  //           />
-  //         </div>
-  //         <div>
-  //           <div className="product-name">
-  //             <a>{product.name}</a>
-  //           </div>
-  //           <div>
-  //             <a>Cantidad:</a>
-  //           </div>
-  //         </div>
-  //       </div>
-  //       <div className="price-container">
-  //         <div className="price-panel">
-  //           <a>Total: ${product.price}</a>
-  //         </div>
-  //         <div>
-  //           <button className="add-button" type="submit">
-  //             Añadir al carrito
-  //           </button>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   ));
-  //   return <div className="product-card-container">{newProductCard}</div>;
-  // } else {
-  //   return <p>Error al obtener productos</p>;
-  // }
-  return (
-    <div className="product-card-container">
-      {Object.keys(products).map((key, index) => {
-        return (
-          <div className="new-product-card" key={index}>
-            <div className="product-panel">
-              <div className="product-container">
-                {/* <img
-                  className="product-image"
-                  src={product.src}
-                  alt={product.alt}
-                /> */}
-                <img
-                  className="product-image"
-                  src="https://www.coca-colamexico.com.mx/content/dam/journey/mx/es/private/brand-detail/fanta/Naranja1.png"
-                  alt="imagen del producto"
-                />
-              </div>
-              <div>
-                <div className="product-name">
-                  <a>{key}</a>
+  if (products) {
+    return (
+      <div className="product-card-container">
+        {products.map((product, index) => {
+          return (
+            <div className="new-product-card" key={index}>
+              <div className="product-panel">
+                <div className="product-container">
+                  <img
+                    className="product-image"
+                    src={product.image}
+                    alt="producto"
+                  />
                 </div>
                 <div>
-                  <ProductQuantity />
+                  <div className="product-name">
+                    <a>{product.name}</a>
+                  </div>
+                  <div>
+                    <ProductQuantity />
+                  </div>
+                </div>
+              </div>
+              <div className="price-container">
+                <div className="price-panel">
+                  <a>Total: ${product.price}</a>
+                </div>
+                <div>
+                  <button
+                    onClick={() =>
+                      addToCart(
+                        Math.random(),
+                        product.image,
+                        "producto",
+                        product.name,
+                        product.price,
+                        1
+                      )
+                    }
+                    className="add-button"
+                    type="submit"
+                  >
+                    Añadir al carrito
+                  </button>
                 </div>
               </div>
             </div>
-            <div className="price-container">
-              <div className="price-panel">
-                {/* <a>Total: ${product.price}</a> */}
-                <a>Precio: $10</a>
-              </div>
-              <div>
-                <button
-                  onClick={() => addToCart(key)}
-                  className="add-button"
-                  type="submit"
-                >
-                  Añadir al carrito
-                </button>
-              </div>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
+          );
+        })}
+      </div>
+    );
+  } else {
+    return <p>Error al obtener productos</p>;
+  }
 }
 
 export default NewProduct;
