@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 const Login: NextPage = () => {
   const router = useRouter();

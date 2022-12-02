@@ -9,7 +9,7 @@ function Navbar() {
   const [menuClosed, setMenuClosed] = useState(true);
   const [logedIn, setLogedIn] = useState(false);
   const [admin, setAdmin] = useState<boolean>(false);
-  const [loginPopoverClosed, setLoginPopoverClosed] = useState(true)
+  const [loginPopoverClosed, setLoginPopoverClosed] = useState(true);
   const router = useRouter();
 
   const menuToggle = () => {
@@ -27,38 +27,42 @@ function Navbar() {
   };
 
   const Logout = () => {
-    localStorage.clear()
-    router.push('/');
-  }
+    localStorage.clear();
+    router.push("/");
+  };
 
   const NewUser = () => {
     localStorage.setItem("aLink", "");
-    router.push('/user/create');
-  }
+    router.push("/user/create");
+  };
 
   const reportBug = () => {
     localStorage.setItem("aLink", "");
-    router.push('/user/bugs');
-  }
+    router.push("/user/bugs");
+  };
 
   const loginToggle = () => {
     const loginPopover = document.querySelector<HTMLElement>(
       ".Navbar_navbarLogginPopover__pn4wB"
     );
 
-    if(loginPopoverClosed){
-      loginPopover ? (loginPopover.style.display = "block") : console.log("login popover error");
+    if (loginPopoverClosed) {
+      loginPopover
+        ? (loginPopover.style.display = "block")
+        : console.log("login popover error");
       setLoginPopoverClosed(false);
-    } else if(!loginPopoverClosed){
-      loginPopover ? (loginPopover.style.display = "none") : console.log("login popover error")
+    } else if (!loginPopoverClosed) {
+      loginPopover
+        ? (loginPopover.style.display = "none")
+        : console.log("login popover error");
       setLoginPopoverClosed(true);
     }
-  }
+  };
 
   useEffect(() => {
     const loginState = localStorage.getItem("logedIn") === "true";
     const getAdmin = localStorage.getItem("admin") === "true";
-    setAdmin(getAdmin)
+    setAdmin(getAdmin);
     setLogedIn(loginState);
   });
 
@@ -119,9 +123,15 @@ function Navbar() {
         {!logedIn && (
           <div className={styles.navbarNavigation}>
             <p>|</p>
-            <a className="navigationLink" href="/#inicio">Inicio</a>
-            <a className="navigationLink" href="/#productos">Productos</a>
-            <a className="navigationLink" href="/#equipo">Equipo</a>
+            <a className="navigationLink" href="/#inicio">
+              Inicio
+            </a>
+            <a className="navigationLink" href="/#productos">
+              Productos
+            </a>
+            <a className="navigationLink" href="/#equipo">
+              Equipo
+            </a>
           </div>
         )}
       </div>
@@ -141,24 +151,20 @@ function Navbar() {
         <div className={styles.navbarLogedIn}>
           <FaUserCircle
             className={styles.logginIcon}
-            style={{ 
-              fontSize: "28px", 
+            style={{
+              fontSize: "28px",
               marginRight: "48px",
               cursor: "pointer",
-              color: "#fff"
+              color: "#fff",
             }}
             onClick={loginToggle}
           />
           <div className={styles.navbarLogginPopover}>
             <ul>
               <li>Configuración</li>
-              {admin &&
-                <li onClick={NewUser}>
-                  Nuevo Usuario
-                </li>
-              }
-              <li onClick={reportBug} >Reportar Error</li>
-              <li onClick={Logout} >Cerrar Sesión</li>
+              {admin && <li onClick={NewUser}>Nuevo Usuario</li>}
+              <li onClick={reportBug}>Reportar Error</li>
+              <li onClick={Logout}>Cerrar Sesión</li>
             </ul>
           </div>
         </div>
