@@ -8,16 +8,16 @@ function NewProductCart() {
       id: 1,
       src: "https://www.coca-colamexico.com.mx/content/dam/journey/mx/es/private/brand-detail/ynada/Naranja.png",
       alt: "product name",
-      name: "NaranjayNada",
-      total: 10,
-      quantity: 1,
+      name: "Naranja y Nada 600ml",
+      total: 30,
+      quantity: 2,
     },
     {
       id: 2,
-      src: "https://www.coca-colamexico.com.mx/content/dam/journey/mx/es/private/brand-detail/ynada/Naranja.png",
+      src: "https://www.coca-colamexico.com.mx/content/dam/journey/mx/es/private/brand-detail/powerade/new/moras.png",
       alt: "product name",
-      name: "NaranjayNada",
-      total: 10,
+      name: "Powerade Moras 600ml",
+      total: 14,
       quantity: 1,
     },
   ]);
@@ -42,6 +42,7 @@ function NewProductCart() {
         <div className="cart-price-container">
           <a className="product-name">{props.name}</a>
           <a>Cantidad: {props.quantity}</a>
+          <a>Total: ${props.total}</a>
         </div>
         <div className="close">
           <FaWindowClose onClick={() => deleteCartItem(props.id)} />

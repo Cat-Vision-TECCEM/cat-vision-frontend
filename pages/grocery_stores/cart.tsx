@@ -14,7 +14,7 @@ const cart: NextPage = () => {
           <NewProductCart />
         </div>
         <div>
-          <a className="total">Total: $0</a>
+          <a className="total">Total: $44</a>
         </div>
       </div>
     </div>
