@@ -4,6 +4,7 @@ import Map from "../components/Map";
 import { useEffect, useState } from "react";
 import { useLoadScript } from "@react-google-maps/api";
 import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 
 const dashboard: NextPage = () => {
   const router = useRouter();
@@ -28,7 +29,13 @@ const dashboard: NextPage = () => {
       }
     );
     const orderJSON = await orderData.json();
-    setOrders(orderJSON.ordenes);
+    if (orderJSON.error === "Token error") {
+      toast.error("Sesión expirada");
+      localStorage.clear();
+      router.push("/login");
+    } else {
+      setOrders(orderJSON.ordenes);
+    }
   };
 
   useEffect(() => {

@@ -5,6 +5,7 @@ import styles from "../styles/Home.module.css";
 import { AiFillCheckCircle } from "react-icons/ai";
 import anime from "animejs";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -83,7 +84,7 @@ const Home: NextPage = () => {
         <section className={styles.homeInfo} id="inicio">
           <div className={styles.homeTitles}>
             <h1 style={{ fontWeight: "300" }}>Cat Vision</h1>
-            <h1>Sencillo, Moderno, Practico</h1>
+            <h1>Sencillo, Moderno, Práctico</h1>
             <p style={{ marginTop: "32px" }}>
               Eficienta la interacción con tus clientes usando el poder de la IA
             </p>
@@ -97,20 +98,21 @@ const Home: NextPage = () => {
 
         <section className={styles.productsContainer} id="productos">
           <div className={styles.homeMargin}>
-            <h1>Descubre tu plan Perfecto</h1>
+            <h1>Descubre tu plan perfecto</h1>
             <div className={styles.productsCards}>
               <div className={styles.productCard}>
                 <div className={styles.productHeader}>
                   <span className={styles.productLicense}>Basico</span>
-                  <h2>$520 MXN</h2>
-                  <span className={styles.productDuration}>/Mensual</span>
+                  <h2>$20,000 MXN</h2>
+                  <span className={styles.productDuration}>/Mes</span>
+                  <span><small style={{fontSize: 10}}>*Contrato Anual</small></span>
                   <br />
                   <input type="submit" value="Adquirir" />
                 </div>
                 <ul className={styles.productFeatures}>
                   <li>
                     <AiFillCheckCircle />
-                    <a href="#">200 tiendas</a>
+                    <a href="#">Tiendas Ilimitadas <small>(23,000 por tienda)</small></a>
                   </li>
                   <li>
                     <AiFillCheckCircle />
@@ -138,15 +140,16 @@ const Home: NextPage = () => {
               <div className={styles.productCard}>
                 <div className={styles.productHeader}>
                   <span className={styles.productLicense}>Completo</span>
-                  <h2>$2500 MXN</h2>
-                  <span className={styles.productDuration}>/Mensual</span>
+                  <h2>$23,000 MXN</h2>
+                  <span className={styles.productDuration}>/Mes</span>
+                  <span><small style={{fontSize: 10}}>*Contrato Anual</small></span>
                   <br />
                   <input type="submit" value="Adquirir" />
                 </div>
                 <ul className={styles.productFeatures}>
                   <li>
                     <AiFillCheckCircle />
-                    <a href="#">2500 tiendas</a>
+                    <a href="#">Tiendas ilimitadas <small>(18,000 por tienda)</small></a>
                   </li>
                   <li>
                     <AiFillCheckCircle />
@@ -178,15 +181,16 @@ const Home: NextPage = () => {
               <div className={styles.productCard}>
                 <div className={styles.productHeader}>
                   <span className={styles.productLicense}>Pro</span>
-                  <h2>$5000 MXN</h2>
-                  <span className={styles.productDuration}>/Mensual</span>
+                  <h2>$25,000 MXN</h2>
+                  <span className={styles.productDuration}>/Mes</span>
+                  <span><small style={{fontSize: 10}}>*Contrato Anual</small></span>
                   <br />
                   <input type="submit" value="Adquirir" />
                 </div>
                 <ul className={styles.productFeatures}>
                   <li>
                     <AiFillCheckCircle />
-                    <a href="#">7000 tiendas</a>
+                    <a href="#">Tiendas ilimitadas <small>(15,000 por tienda)</small></a>
                   </li>
                   <li>
                     <AiFillCheckCircle />
@@ -224,14 +228,14 @@ const Home: NextPage = () => {
 
         <section className={styles.teamContainer} id="equipo">
           <div className={styles.teamCard}>
-            <div
-              style={{
-                backgroundColor: "#000",
-                width: "100%",
-                height: "200px",
-                borderRadius: "5px 5px 0 0",
-              }}
-            ></div>
+            <Image
+              src={"/Diego.jpeg"}
+              alt="Imagen producto"
+              width={250}
+              height={200}
+              objectFit={"cover"}
+              unoptimized
+            />
             <div className={styles.teamInfo}>
               <p style={{ fontWeight: "400" }}>
                 Diego Armando Ulibarri Hernández
@@ -240,14 +244,15 @@ const Home: NextPage = () => {
             </div>
           </div>
           <div className={styles.teamCard}>
-            <div
-              style={{
-                backgroundColor: "#000",
-                width: "100%",
-                height: "200px",
-                borderRadius: "5px 5px 0 0",
-              }}
-            ></div>
+            <Image
+              src={"/Fer.jpeg"}
+              alt="Imagen producto"
+              width={250}
+              height={280}
+              objectFit={"cover"}
+              objectPosition={"top"}
+              unoptimized
+            />
             <div className={styles.teamInfo}>
               <p style={{ fontWeight: "400" }}>
                 María Fernanda Ramírez Barragán
@@ -256,98 +261,98 @@ const Home: NextPage = () => {
             </div>
           </div>
           <div className={styles.teamCard}>
-            <div
-              style={{
-                backgroundColor: "#000",
-                width: "100%",
-                height: "200px",
-                borderRadius: "5px 5px 0 0",
-              }}
-            ></div>
+            <Image
+              src={"/David.jpeg"}
+              alt="Imagen producto"
+              width={250}
+              height={200}
+              objectFit={"cover"}
+              unoptimized
+            />
             <div className={styles.teamInfo}>
               <p style={{ fontWeight: "400" }}>David Rodríguez Fragoso</p>
               <p>Back End Developer</p>
             </div>
           </div>
           <div className={styles.teamCard}>
-            <div
-              style={{
-                backgroundColor: "#000",
-                width: "100%",
-                height: "200px",
-                borderRadius: "5px 5px 0 0",
-              }}
-            ></div>
+            <Image
+              src={"/Erick.jpeg"}
+              alt="Imagen producto"
+              width={250}
+              height={200}
+              objectFit={"cover"}
+              unoptimized
+            />
             <div className={styles.teamInfo}>
               <p style={{ fontWeight: "400" }}>Erick Hernández Silva</p>
               <p>Back End Developer</p>
             </div>
           </div>
           <div className={styles.teamCard}>
-            <div
-              style={{
-                backgroundColor: "#000",
-                width: "100%",
-                height: "200px",
-                borderRadius: "5px 5px 0 0",
-              }}
-            ></div>
+            <Image
+              src={"/Edu.jpeg"}
+              alt="Imagen producto"
+              width={250}
+              height={200}
+              objectFit={"cover"}
+              unoptimized
+            />
             <div className={styles.teamInfo}>
               <p style={{ fontWeight: "400" }}>Eduardo Rodríguez López</p>
               <p>Back End Developer</p>
             </div>
           </div>
           <div className={styles.teamCard}>
-            <div
-              style={{
-                backgroundColor: "#000",
-                width: "100%",
-                height: "200px",
-                borderRadius: "5px 5px 0 0",
-              }}
-            ></div>
+            <Image
+              src={"/Isra.jpeg"}
+              alt="Imagen producto"
+              width={250}
+              height={200}
+              objectFit={"cover"}
+              unoptimized
+            />
             <div className={styles.teamInfo}>
               <p style={{ fontWeight: "400" }}>Israel Sánchez Miranda</p>
               <p>Project Manager</p>
             </div>
           </div>
           <div className={styles.teamCard}>
-            <div
-              style={{
-                backgroundColor: "#000",
-                width: "100%",
-                height: "200px",
-                borderRadius: "5px 5px 0 0",
-              }}
-            ></div>
+            <Image
+              src={"/Liam.jpeg"}
+              alt="Imagen producto"
+              width={250}
+              height={200}
+              objectFit={"cover"}
+              unoptimized
+            />
             <div className={styles.teamInfo}>
               <p style={{ fontWeight: "400" }}>Liam Garay Monroy</p>
               <p>Machine Learning Engineer</p>
             </div>
           </div>
           <div className={styles.teamCard}>
-            <div
-              style={{
-                backgroundColor: "#000",
-                width: "100%",
-                height: "200px",
-                borderRadius: "5px 5px 0 0",
-              }}
-            ></div>
+            <Image
+              src={"/Joe.jpeg"}
+              alt="Imagen producto"
+              width={250}
+              height={280}
+              objectFit={"cover"}
+              unoptimized
+            />
             <div className={styles.teamInfo}>
               <p style={{ fontWeight: "400" }}>Raúl Youthan Irigoyen Osorio</p>
               <p>Machine Learning Engineer</p>
             </div>
           </div>
           <div className={styles.teamCard}>
-            <div
-              style={{
-                backgroundColor: "#000",
-                width: "100%",
-                height: "200px",
-                borderRadius: "5px 5px 0 0",
-              }}
-            ></div>
+            <Image
+              src={"/Andrick.jpeg"}
+              alt="Imagen producto"
+              width={250}
+              height={200}
+              objectFit={"cover"}
+              unoptimized
+            />
             <div className={styles.teamInfo}>
               <p style={{ fontWeight: "400" }}>
                 Octavio Andrick Sánchez Perusquia
@@ -356,28 +361,28 @@ const Home: NextPage = () => {
             </div>
           </div>
           <div className={styles.teamCard}>
-            <div
-              style={{
-                backgroundColor: "#000",
-                width: "100%",
-                height: "200px",
-                borderRadius: "5px 5px 0 0",
-              }}
-            ></div>
+            <Image
+              src={"/Ren.jpeg"}
+              alt="Imagen producto"
+              width={250}
+              height={200}
+              objectFit={"cover"}
+              unoptimized
+            />
             <div className={styles.teamInfo}>
               <p style={{ fontWeight: "400" }}>Renata de Luna Flores</p>
               <p>Prototype and User developer</p>
             </div>
           </div>
           <div className={styles.teamCard}>
-            <div
-              style={{
-                backgroundColor: "#000",
-                width: "100%",
-                height: "200px",
-                borderRadius: "5px 5px 0 0",
-              }}
-            ></div>
+            <Image
+              src={"/Rob.jpeg"}
+              alt="Imagen producto"
+              width={250}
+              height={200}
+              objectFit={"cover"}
+              unoptimized
+            />
             <div className={styles.teamInfo}>
               <p style={{ fontWeight: "400" }}>Roberto Valdez Jasso</p>
               <p>Hardware Developer</p>

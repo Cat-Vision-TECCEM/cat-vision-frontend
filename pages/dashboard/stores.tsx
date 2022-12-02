@@ -106,9 +106,16 @@ const stores: NextPage = () => {
       `${process.env.NEXT_PUBLIC_BACK_URL}store/getProducts?store_id=${store.id}`
     );
     const jsonProducts = await storeProducts.json();
+
     setProducts(jsonProducts.products);
     const salesData = await fetch(
-      `${process.env.NEXT_PUBLIC_BACK_URL}order/getSalesProduct?start_month=${startMonth}&start_year=${startYear}&store_id=${store.id}&end_month=${endMonth}&end_year=${endYear}`
+      `${
+        process.env.NEXT_PUBLIC_BACK_URL
+      }order/getSalesProduct?start_month=${startMonth}&start_year=${startYear}&store_id=${
+        store.id
+      }&end_month=${
+        parseInt(endMonth) <= 12 ? endMonth : "12"
+      }&end_year=${endYear}`
     );
     const salesJSON = await salesData.json();
     let counter = 0;
@@ -156,9 +163,7 @@ const stores: NextPage = () => {
     });
 
     const orderData = await fetch(
-      `${process.env.NEXT_PUBLIC_BACK_URL}order/getOrders?store_id=${
-        store.id
-      }&company_id=${companyId}`,
+      `${process.env.NEXT_PUBLIC_BACK_URL}order/getOrders?store_id=${store.id}&company_id=${companyId}`,
       {
         method: "GET",
         headers: {
@@ -167,9 +172,13 @@ const stores: NextPage = () => {
       }
     );
     const orderJSON = await orderData.json();
-    setOrders(orderJSON.ordenes);
-
     toast.dismiss(loadingData);
+    if (orderJSON.error === "Token error") {
+      toast.error("Sesión expirada");
+      localStorage.clear();
+      router.push("/login");
+    }
+    setOrders(orderJSON.ordenes);
     toast.success("Datos cargados");
   };
 
@@ -253,7 +262,7 @@ const stores: NextPage = () => {
         </div>
 
         <div className="dashboardContentStore">
-          <div className="card twoSpaces">
+          <div style={{ maxHeight: "335px" }} className="card twoSpaces">
             {products.map((product, index) => {
               return (
                 <div className="productChart" key={index}>
@@ -283,7 +292,7 @@ const stores: NextPage = () => {
               );
             })}
           </div>
-          <div className="card">
+          <div style={{ maxHeight: "335px" }} className="card">
             {orders.length > 0 && <p style={{ fontSize: 20 }}>Pedidos</p>}
             {orders &&
               orders.map((order, index) => {
@@ -298,10 +307,10 @@ const stores: NextPage = () => {
                 );
               })}
           </div>
-          <div className="card">
+          <div style={{ maxHeight: "335px" }} className="card">
             {sales && <DoughnutChart chartData={sales} />}
           </div>
-          <div className="card">
+          <div style={{ maxHeight: "335px" }} className="card">
             {lineSales && <LineChart chartData={lineSales} />}
           </div>
           {/* <div className="card"></div> */}
