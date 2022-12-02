@@ -156,9 +156,7 @@ const stores: NextPage = () => {
     });
 
     const orderData = await fetch(
-      `${process.env.NEXT_PUBLIC_BACK_URL}order/getOrders?store_id=${
-        store.id
-      }&company_id=${companyId}`,
+      `${process.env.NEXT_PUBLIC_BACK_URL}order/getOrders?store_id=${store.id}&company_id=${companyId}`,
       {
         method: "GET",
         headers: {
@@ -167,9 +165,13 @@ const stores: NextPage = () => {
       }
     );
     const orderJSON = await orderData.json();
-    setOrders(orderJSON.ordenes);
-
     toast.dismiss(loadingData);
+    if (orderJSON.error === "Token error") {
+      toast.error("Sesión expirada");
+      localStorage.clear();
+      router.push("/login");
+    }
+    setOrders(orderJSON.ordenes);
     toast.success("Datos cargados");
   };
 

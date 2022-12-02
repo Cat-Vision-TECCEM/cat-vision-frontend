@@ -42,6 +42,7 @@ function NewStoreForm({ setNewStore }: NewStoreProps) {
   };
 
   const createStore = async (e: React.MouseEvent<HTMLInputElement>) => {
+    const company_id = localStorage.getItem("company_id")
     e.preventDefault();
     const creatingStore = toast.loading("Creando Tienda...");
     const values = value.split(",");
@@ -54,17 +55,23 @@ function NewStoreForm({ setNewStore }: NewStoreProps) {
         city: values[3].trim(),
         lat: latitude,
         lng: longitude,
+        company_id: company_id,
       };
-      await fetch(`${process.env.NEXT_PUBLIC_BACK_URL}store/create`, {
+      const createStorePost = await fetch(`${process.env.NEXT_PUBLIC_BACK_URL}store/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(storeData),
       });
-
+      const createStoreJSON = await createStorePost.json();
       toast.dismiss(creatingStore);
-      toast.success("Tienda Creada");
+      if(createStoreJSON.error){
+        toast.error(createStoreJSON.error)
+      }else{
+        toast.success("Tienda Creada");
+      }
+
     } else {
       toast.dismiss(creatingStore);
       toast.error("No se pudo solicitar la tienda en la dirección seleccionada!");

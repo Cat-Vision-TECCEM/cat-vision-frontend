@@ -42,7 +42,7 @@ const bugs: NextPage = () => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: any) => {
     if (e.target.id === "error") {
       setError(e.target.value);
     } else if (e.target.id === "subject") {
@@ -89,7 +89,7 @@ const bugs: NextPage = () => {
             <input
               type="submit"
               value="Reportar Error"
-              onClick={(e: React.MouseEvent<HTMLInputElement>) => reportBug(e)}
+              onClick={(e) => reportBug(e)}
             />
           </div>
         </form>

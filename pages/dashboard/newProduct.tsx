@@ -26,7 +26,6 @@ const newProduct: NextPage = () => {
       productData.append('name', name);
       productData.append('selling_price', price.toString());
       productData.append('image', image);
-      console.log(token);
 
       const createProduct = await fetch(`${process.env.NEXT_PUBLIC_BACK_URL}product/create`, {
         method: "POST",
@@ -38,7 +37,11 @@ const newProduct: NextPage = () => {
 
       const jsonCreateProduct = await createProduct.json();
       toast.dismiss(creatingProduct);
-      if(jsonCreateProduct.error){
+      if(jsonCreateProduct.error === "Token error"){
+        toast.error("Sesión expirada");
+        localStorage.clear()
+        router.push("/login")
+      }else if(jsonCreateProduct.error){
         toast.error(
           jsonCreateProduct.error
         );

@@ -2,6 +2,7 @@ import styles from "../styles/Login.module.css";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const Login: NextPage = () => {
   const router = useRouter();
@@ -36,11 +37,9 @@ const Login: NextPage = () => {
       }
     );
     const loginJSON = await loginFetch.json();
-    console.log(loginJSON);
-    
-
-    // toast.error("Usuario o Contraseña Incorrectos");
-    if (loginJSON.type === "company") {
+    if (loginJSON.error){
+      toast.error("Usuario o Contraseña Incorrectos");
+    }else if (loginJSON.type === "company") {
       localStorage.setItem("user", username);
       localStorage.setItem("company_id", loginJSON.store_or_company_id);
       localStorage.setItem("type", loginJSON.type);
@@ -131,7 +130,7 @@ const Login: NextPage = () => {
               Recuerdame{" "}
             </label>
           </div>
-          <a href="">¿Olvidaste la contraseña?</a>
+          <a href="user/reset">¿Olvidaste la contraseña?</a>
         </div>
         <input type="submit" value="Ingresar" onClick={submitForm} />
       </form>

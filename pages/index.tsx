@@ -83,7 +83,7 @@ const Home: NextPage = () => {
         <section className={styles.homeInfo} id="inicio">
           <div className={styles.homeTitles}>
             <h1 style={{ fontWeight: "300" }}>Cat Vision</h1>
-            <h1>Sencillo, Moderno, Practico</h1>
+            <h1>Sencillo, Moderno, Práctico</h1>
             <p style={{ marginTop: "32px" }}>
               Eficienta la interacción con tus clientes usando el poder de la IA
             </p>
@@ -97,20 +97,21 @@ const Home: NextPage = () => {
 
         <section className={styles.productsContainer} id="productos">
           <div className={styles.homeMargin}>
-            <h1>Descubre tu plan Perfecto</h1>
+            <h1>Descubre tu plan perfecto</h1>
             <div className={styles.productsCards}>
               <div className={styles.productCard}>
                 <div className={styles.productHeader}>
                   <span className={styles.productLicense}>Basico</span>
-                  <h2>$520 MXN</h2>
-                  <span className={styles.productDuration}>/Mensual</span>
+                  <h2>$20,000 MXN</h2>
+                  <span className={styles.productDuration}>/Mes</span>
+                  <span><small style={{fontSize: 10}}>*Contrato Anual</small></span>
                   <br />
                   <input type="submit" value="Adquirir" />
                 </div>
                 <ul className={styles.productFeatures}>
                   <li>
                     <AiFillCheckCircle />
-                    <a href="#">200 tiendas</a>
+                    <a href="#">Tiendas Ilimitadas <small>(23,000 por tienda)</small></a>
                   </li>
                   <li>
                     <AiFillCheckCircle />
@@ -138,15 +139,16 @@ const Home: NextPage = () => {
               <div className={styles.productCard}>
                 <div className={styles.productHeader}>
                   <span className={styles.productLicense}>Completo</span>
-                  <h2>$2500 MXN</h2>
-                  <span className={styles.productDuration}>/Mensual</span>
+                  <h2>$23,000 MXN</h2>
+                  <span className={styles.productDuration}>/Mes</span>
+                  <span><small style={{fontSize: 10}}>*Contrato Anual</small></span>
                   <br />
                   <input type="submit" value="Adquirir" />
                 </div>
                 <ul className={styles.productFeatures}>
                   <li>
                     <AiFillCheckCircle />
-                    <a href="#">2500 tiendas</a>
+                    <a href="#">Tiendas ilimitadas <small>(18,000 por tienda)</small></a>
                   </li>
                   <li>
                     <AiFillCheckCircle />
@@ -178,15 +180,16 @@ const Home: NextPage = () => {
               <div className={styles.productCard}>
                 <div className={styles.productHeader}>
                   <span className={styles.productLicense}>Pro</span>
-                  <h2>$5000 MXN</h2>
-                  <span className={styles.productDuration}>/Mensual</span>
+                  <h2>$25,000 MXN</h2>
+                  <span className={styles.productDuration}>/Mes</span>
+                  <span><small style={{fontSize: 10}}>*Contrato Anual</small></span>
                   <br />
                   <input type="submit" value="Adquirir" />
                 </div>
                 <ul className={styles.productFeatures}>
                   <li>
                     <AiFillCheckCircle />
-                    <a href="#">7000 tiendas</a>
+                    <a href="#">Tiendas ilimitadas <small>(15,000 por tienda)</small></a>
                   </li>
                   <li>
                     <AiFillCheckCircle />
